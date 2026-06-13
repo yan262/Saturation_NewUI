@@ -1,0 +1,824 @@
+Dependencies for Project 'test_vl53l8cx', Target 'test_vl53l8cx': (DO NOT MODIFY !)
+CompilerVersion: 6220000::V6.22::ARMCLANG
+F (startup_stm32g431xx.s)(0x69C40583)(--target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -masm=auto  -Wa,armasm,--diag_suppress=A1950W -c-gdwarf-4 -Wa,armasm,--pd,"__MICROLIB SETA 1"-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-Wa,armasm,--pd,"__UVISION_VERSION SETA 540" -Wa,armasm,--pd,"STM32G431xx SETA 1" -Wa,armasm,--pd,"_RTE_ SETA 1"-o test_vl53l8cx/startup_stm32g431xx.o)
+F (../Core/Src/main.c)(0x6A1D8F5B)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/main.o -MMD)
+I (..\Core\Inc\main.h)(0x69C3D2AB)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+I (..\Drivers\BSP\custom\custom.h)(0x69AFB6B3)
+I (..\Core\Inc\custom_conf.h)(0x69C40581)
+I (..\Drivers\BSP\custom\custom_errno.h)(0x69AFB6B3)
+I (..\Core\Inc\dma.h)(0x69C40580)
+I (..\Core\Inc\usart.h)(0x69C3D2AA)
+I (..\Core\Inc\gpio.h)(0x69AFB6B1)
+I (..\TOF\App\app_tof.h)(0x69AFB6B3)
+F (../Core/Src/gpio.c)(0x69C3D2A8)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/gpio.o -MMD)
+I (..\Core\Inc\gpio.h)(0x69AFB6B1)
+I (..\Core\Inc\main.h)(0x69C3D2AB)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+I (..\Drivers\BSP\custom\custom.h)(0x69AFB6B3)
+I (..\Core\Inc\custom_conf.h)(0x69C40581)
+I (..\Drivers\BSP\custom\custom_errno.h)(0x69AFB6B3)
+F (../Core/Src/bsp.c)(0x69AFB6B2)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/bsp.o -MMD)
+F (../Core/Src/dma.c)(0x69C40580)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/dma.o -MMD)
+I (..\Core\Inc\dma.h)(0x69C40580)
+I (..\Core\Inc\main.h)(0x69C3D2AB)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+I (..\Drivers\BSP\custom\custom.h)(0x69AFB6B3)
+I (..\Core\Inc\custom_conf.h)(0x69C40581)
+I (..\Drivers\BSP\custom\custom_errno.h)(0x69AFB6B3)
+F (../Core/Src/usart.c)(0x69C40580)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/usart.o -MMD)
+I (..\Core\Inc\usart.h)(0x69C3D2AA)
+I (..\Core\Inc\main.h)(0x69C3D2AB)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+I (..\Drivers\BSP\custom\custom.h)(0x69AFB6B3)
+I (..\Core\Inc\custom_conf.h)(0x69C40581)
+I (..\Drivers\BSP\custom\custom_errno.h)(0x69AFB6B3)
+F (../Core/Src/custom_bus.c)(0x69AFB6B3)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/custom_bus.o -MMD)
+I (..\Core\Inc\custom_bus.h)(0x69AFB6B3)
+I (..\Core\Inc\custom_conf.h)(0x69C40581)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+I (..\Core\Inc\custom_errno.h)(0x69AFB6B3)
+F (../Core/Src/stm32g4xx_it.c)(0x69C40581)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_it.o -MMD)
+I (..\Core\Inc\main.h)(0x69C3D2AB)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+I (..\Drivers\BSP\custom\custom.h)(0x69AFB6B3)
+I (..\Core\Inc\custom_conf.h)(0x69C40581)
+I (..\Drivers\BSP\custom\custom_errno.h)(0x69AFB6B3)
+I (..\Core\Inc\stm32g4xx_it.h)(0x69C40581)
+F (../Core/Src/stm32g4xx_hal_msp.c)(0x69AFB6B4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal_msp.o -MMD)
+I (..\Core\Inc\main.h)(0x69C3D2AB)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+I (..\Drivers\BSP\custom\custom.h)(0x69AFB6B3)
+I (..\Core\Inc\custom_conf.h)(0x69C40581)
+I (..\Drivers\BSP\custom\custom_errno.h)(0x69AFB6B3)
+F (../TOF/App/app_tof.c)(0x6A16880E)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/app_tof.o -MMD)
+I (..\TOF\App\app_tof.h)(0x69AFB6B3)
+I (..\Core\Inc\main.h)(0x69C3D2AB)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+I (..\Drivers\BSP\custom\custom.h)(0x69AFB6B3)
+I (..\Core\Inc\custom_conf.h)(0x69C40581)
+I (..\Drivers\BSP\custom\custom_errno.h)(0x69AFB6B3)
+I (..\Drivers\BSP\53L8A1\53l8a1_ranging_sensor.h)(0x695364D4)
+I (..\Drivers\BSP\Components\Common\ranging_sensor.h)(0x695364D4)
+I (..\TOF\Target\53l8a1_conf.h)(0x69AFB6B3)
+I (..\Core\Inc\custom_bus.h)(0x69AFB6B3)
+I (..\Core\Inc\custom_errno.h)(0x69AFB6B3)
+I (..\Drivers\BSP\Components\vl53l8cx\vl53l8cx.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\modules\vl53l8cx_api.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\porting\platform.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\modules\vl53l8cx_plugin_xtalk.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\modules\vl53l8cx_plugin_detection_thresholds.h)(0x695364D4)
+I (..\TOF\Target\app_tof_pin_conf.h)(0x69C3F8FB)
+F (../Drivers/BSP/custom/custom.c)(0x69AFB6B3)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/custom.o -MMD)
+I (..\Drivers\BSP\custom\custom.h)(0x69AFB6B3)
+I (..\Core\Inc\custom_conf.h)(0x69C40581)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+I (..\Drivers\BSP\custom\custom_errno.h)(0x69AFB6B3)
+I (..\Core\Inc\main.h)(0x69C3D2AB)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal_i2c.o -MMD)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c_ex.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal_i2c_ex.o -MMD)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal.o -MMD)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal_rcc.o -MMD)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal_rcc_ex.o -MMD)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal_flash.o -MMD)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal_flash_ex.o -MMD)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal_flash_ramfunc.o -MMD)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal_gpio.o -MMD)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal_exti.o -MMD)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal_dma.o -MMD)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal_dma_ex.o -MMD)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal_pwr.o -MMD)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal_pwr_ex.o -MMD)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal_cortex.o -MMD)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal_uart.o -MMD)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/stm32g4xx_hal_uart_ex.o -MMD)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Core/Src/system_stm32g4xx.c)(0x69AF71C0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/system_stm32g4xx.o -MMD)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+F (../Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_api.c)(0x695364D4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/vl53l8cx_api.o -MMD)
+I (..\Drivers\BSP\Components\vl53l8cx\modules\vl53l8cx_api.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\porting\platform.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\modules\vl53l8cx_buffers.h)(0x695364D4)
+F (../Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_detection_thresholds.c)(0x695364D4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/vl53l8cx_plugin_detection_thresholds.o -MMD)
+I (..\Drivers\BSP\Components\vl53l8cx\modules\vl53l8cx_plugin_detection_thresholds.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\modules\vl53l8cx_api.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\porting\platform.h)(0x695364D4)
+F (../Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_motion_indicator.c)(0x695364D4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/vl53l8cx_plugin_motion_indicator.o -MMD)
+I (..\Drivers\BSP\Components\vl53l8cx\modules\vl53l8cx_plugin_motion_indicator.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\modules\vl53l8cx_api.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\porting\platform.h)(0x695364D4)
+F (../Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c)(0x695364D4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/vl53l8cx_plugin_xtalk.o -MMD)
+I (..\Drivers\BSP\Components\vl53l8cx\modules\vl53l8cx_plugin_xtalk.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\modules\vl53l8cx_api.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\porting\platform.h)(0x695364D4)
+F (../Drivers/BSP/Components/vl53l8cx/porting/platform.c)(0x695364D4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/platform.o -MMD)
+I (..\Drivers\BSP\Components\vl53l8cx\porting\platform.h)(0x695364D4)
+F (../Drivers/BSP/Components/vl53l8cx/vl53l8cx.c)(0x695364D4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/vl53l8cx.o -MMD)
+I (..\Drivers\BSP\Components\vl53l8cx\vl53l8cx.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\modules\vl53l8cx_api.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\porting\platform.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\modules\vl53l8cx_plugin_xtalk.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\modules\vl53l8cx_plugin_detection_thresholds.h)(0x695364D4)
+F (../Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c)(0x695364D4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../Core/Inc -I ../TOF/App -I ../TOF/Target -I ../Drivers/BSP/custom -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/BSP/Components/Common -I ../Drivers/BSP/53L8A1 -I ../Drivers/BSP/Components/vl53l8cx/modules -I ../Drivers/BSP/Components/vl53l8cx/porting -I ../Drivers/BSP/Components/vl53l8cx-I./RTE/_test_vl53l8cx-ID:/Keil5/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/Keil5/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o test_vl53l8cx/53l8a1_ranging_sensor.o -MMD)
+I (..\Drivers\BSP\53L8A1\53l8a1_ranging_sensor.h)(0x695364D4)
+I (..\Drivers\BSP\Components\Common\ranging_sensor.h)(0x695364D4)
+I (..\TOF\Target\53l8a1_conf.h)(0x69AFB6B3)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x69AF71C0)
+I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x69AFB6B4)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\stm32g431xx.h)(0x69AF71C0)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x69AF71A8)
+I (..\Drivers\CMSIS\Device\ST\STM32G4xx\Include\system_stm32g4xx.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_gpio_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_dma_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_cortex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_exti.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_flash_ramfunc.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_i2c_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_pwr_ex.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x69AF71C0)
+I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x69AF71C0)
+I (..\Core\Inc\custom_bus.h)(0x69AFB6B3)
+I (..\Core\Inc\custom_conf.h)(0x69C40581)
+I (..\Core\Inc\custom_errno.h)(0x69AFB6B3)
+I (..\Drivers\BSP\Components\vl53l8cx\vl53l8cx.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\modules\vl53l8cx_api.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\porting\platform.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\modules\vl53l8cx_plugin_xtalk.h)(0x695364D4)
+I (..\Drivers\BSP\Components\vl53l8cx\modules\vl53l8cx_plugin_detection_thresholds.h)(0x695364D4)
+F (../Drivers/BSP/53L8A1/LICENSE.txt)(0x695364D4)()
+F (../Drivers/BSP/Components/vl53l8cx/LICENSE.txt)(0x695364D4)()

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--
+  登录页面 (login.html)
+  =====================
+  首次访问 http://localhost:8000 时显示的页面。
+
+  页面布局: 左右全屏分栏
+    左侧 50% — 品牌展示区（Logo、平台名、标语）
+    右侧 50% — 登录表单区（认证方式切换、用户名、密码、登录按钮）
+
+  交互流程:
+    1. 用户选择认证方式（本地账号 / LDAP/AD）
+    2. 输入用户名和密码
+    3. 点击登录或按回车 → 调用 POST /api/auth/login
+    4. 登录成功 → 将 token 存到 localStorage → 跳转 /index.html（仪表板）
+    5. 登录失败 → 显示红色错误提示
+
+  页面依赖:
+    - /static/css/style.css   样式
+    - /static/js/particles.js 粒子背景动画
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 — 电缆桥架饱和度监控</title>
+    <!-- 本地字体: Orbitron(科技感标题), JetBrains Mono(等宽字体) -->
+    <link rel="stylesheet" href="/static/css/fonts.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="login-body">
+    <!-- 全屏粒子动画背景画布 -->
+    <canvas id="particles-canvas"></canvas>
+
+    <div class="login-wrapper">
+        <div class="login-card">
+
+            <!-- ======== 左侧: 品牌展示区 ======== -->
+            <div class="login-brand">
+                <div class="login-logo">⚡</div>
+                <div class="login-title">电缆桥架饱和度监控平台</div>
+                <div class="login-divider"></div>
+                <p class="login-desc">
+                    实时监控 · 智能报警<br>
+                    OneNet 物联网云平台<br>
+                    企业级 RBAC 安全管控
+                </p>
+                <div class="login-version">v2.0 Enterprise</div>
+            </div>
+
+            <!-- ======== 右侧: 登录表单区 ======== -->
+            <div class="login-form">
+                <h2 class="login-heading">🔐 用户登录</h2>
+                <p class="login-subtitle">选择认证方式以继续</p>
+
+                <!-- 认证方式切换标签: 本地账号 / LDAP & AD -->
+                <div class="login-tabs">
+                    <button class="login-tab active" data-tab="local" onclick="switchTab('local')">本地账号</button>
+                    <button class="login-tab" data-tab="ldap" onclick="switchTab('ldap')">LDAP / AD</button>
+                </div>
+
+                <!-- 错误提示栏（默认隐藏，登录失败时显示） -->
+                <div id="login-error" class="login-error hidden"></div>
+
+                <!-- 用户名输入框 -->
+                <div class="login-field">
+                    <label class="login-label">用户名</label>
+                    <input type="text" id="login-username" class="login-input"
+                           placeholder="admin" autocomplete="username" autofocus>
+                </div>
+
+                <!-- 密码输入框（带显隐切换） -->
+                <div class="login-field">
+                    <label class="login-label">密码</label>
+                    <div class="login-pw-wrap">
+                        <input type="password" id="login-password" class="login-input"
+                               placeholder="••••••••" autocomplete="current-password">
+                        <!-- 点击切换密码显示/隐藏 -->
+                        <button type="button" class="login-pw-toggle" id="login-pw-toggle"
+                                onclick="togglePassword()" title="显示/隐藏密码">👁</button>
+                    </div>
+                </div>
+
+                <!-- 登录按钮 -->
+                <button id="login-btn" class="login-btn" onclick="doLogin()">➜ 登 录</button>
+
+                <!-- 底部提示文字（默认账号仅首次使用，管理员创建正式账号后请使用个人账号） -->
+                <div class="login-footer-text">请联系管理员获取登录账号</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 粒子背景动画脚本 -->
+    <script src="/static/js/particles.js"></script>
+
+    <!-- ======== 登录页面交互逻辑 ======== -->
+    <script>
+        // 初始化粒子背景
+        Particles.init('particles-canvas');
+
+        // 当前选中的认证方式: 'local' 或 'ldap'
+        var authType = 'local';
+
+        /**
+         * 切换认证方式标签
+         * 选中标签高亮为青色，未选中恢复暗色
+         * LDAP 模式下用户名 placeholder 变为"域账号"提示
+         */
+        function switchTab(type) {
+            authType = type;
+            // 遍历两个标签，根据是否选中切换 active CSS 类
+            document.querySelectorAll('.login-tab').forEach(function(t) {
+                t.classList.toggle('active', t.dataset.tab === type);
+            });
+            // 更新用户名输入框的占位提示
+            var input = document.getElementById('login-username');
+            input.placeholder = type === 'ldap' ? '域账号' : 'admin';
+        }
+
+        /** 显示错误消息（红色提示条） */
+        function showError(msg) {
+            var el = document.getElementById('login-error');
+            el.textContent = msg;
+            el.classList.remove('hidden');
+        }
+
+        /** 隐藏错误消息 */
+        function hideError() {
+            document.getElementById('login-error').classList.add('hidden');
+        }
+
+        /**
+         * 切换密码显隐
+         * 点击密码框右侧 👁 图标，在 text（可见）和 password（隐藏）之间切换
+         */
+        function togglePassword() {
+            var input = document.getElementById('login-password');
+            var btn = document.getElementById('login-pw-toggle');
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = '🙈';   // 捂住眼睛 = 正在显示密码
+            } else {
+                input.type = 'password';
+                btn.textContent = '👁';   // 睁眼 = 密码已隐藏
+            }
+        }
+
+        /**
+         * 执行登录请求
+         * 1. 校验输入非空
+         * 2. 发送 POST /api/auth/login（无需鉴权，在中间件白名单中）
+         * 3. 成功 → 存储 token 到 localStorage → 跳转仪表板
+         * 4. 失败 → 显示后端返回的错误信息
+         */
+        async function doLogin() {
+            hideError();
+            var username = document.getElementById('login-username').value.trim();
+            var password = document.getElementById('login-password').value;
+
+            // 前端基础校验
+            if (!username || !password) {
+                showError('请输入用户名和密码');
+                return;
+            }
+
+            // 按钮显示 loading spinner，防止重复提交
+            var btn = document.getElementById('login-btn');
+            btn.innerHTML = '<span class="login-spinner"></span> 登录中...';
+            btn.disabled = true;
+
+            try {
+                var resp = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                        auth_type: authType   // 'local' 或 'ldap'
+                    }),
+                });
+
+                var data = await resp.json();
+
+                if (!resp.ok) {
+                    // 后端返回 401/400 等错误
+                    showError(data.detail || '登录失败');
+                    btn.innerHTML = '➜ 登 录';
+                    btn.disabled = false;
+                    return;
+                }
+
+                // 登录成功: 将 token 和用户信息写入浏览器本地存储
+                localStorage.setItem('access_token', data.access_token);
+                localStorage.setItem('refresh_token', data.refresh_token);
+                localStorage.setItem('user_info', JSON.stringify(data.user));
+
+                // 跳转到仪表板页面
+                window.location.replace('/index.html');
+            } catch (e) {
+                // 网络错误（服务器无响应等）
+                showError('网络错误，请检查服务器连接');
+                btn.innerHTML = '➜ 登 录';
+                btn.disabled = false;
+            }
+        }
+
+        // 密码输入框回车 → 触发登录
+        document.getElementById('login-password').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') doLogin();
+        });
+        // 用户名输入框回车 → 触发登录
+        document.getElementById('login-username').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') doLogin();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+/* 本地字体声明 — Google Fonts 离线版本
+ * 字体文件存放在 statics/fonts/ 目录，无需访问外网。
+ *
+ * 包含:
+ *   - Orbitron (400/700/900) — 用于标题和科技感文字
+ *   - JetBrains Mono (400/600) — 用于等宽数字
+ */
+
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/static/fonts/Orbitron-400.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/static/fonts/Orbitron-700.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('/static/fonts/Orbitron-900.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/static/fonts/JetBrainsMono-400.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/static/fonts/JetBrainsMono-600.ttf') format('truetype');
+}

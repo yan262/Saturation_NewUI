@@ -1,0 +1,725 @@
+/**
+  ******************************************************************************
+  * @file          : app_tof.c
+  * @author        : IMG SW Application Team
+  * @brief         : This file provides code for the configuration
+  *                  of the STMicroelectronics.X-CUBE-TOF1.3.4.3 instances.
+  ******************************************************************************
+  *
+  * @attention
+  *
+  * Copyright (c) 2023 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* Includes ------------------------------------------------------------------*/
+#include "app_tof.h"
+#include "main.h"
+#include <stdio.h>
+
+#include "53l8a1_ranging_sensor.h"
+#include "app_tof_pin_conf.h"
+#include "custom.h"
+
+/* Private typedef -----------------------------------------------------------*/
+
+extern double sat;
+
+/* Private define ------------------------------------------------------------*/
+#define TIMING_BUDGET (20U) /* 5 ms < TimingBudget < 100 ms */
+#define RANGING_FREQUENCY (40U) /* Ranging frequency Hz (shall be consistent with TimingBudget value) */
+#define POLLING_PERIOD (20U) /* refresh rate for polling mode (milliseconds) */
+
+/* Private variables ---------------------------------------------------------*/
+static RANGING_SENSOR_ProfileConfig_t Profile;
+static RANGING_SENSOR_Result_t Result;
+static int32_t status = 0;
+static uint8_t ToF_Present[RANGING_SENSOR_INSTANCES_NBR] = {0};
+volatile uint8_t ToF_EventDetected = 0;
+
+static const char *TofDevStr[] =
+{
+  [VL53L8A1_DEV_LEFT] = "LEFT",
+  [VL53L8A1_DEV_CENTER] = "CENTER",
+  [VL53L8A1_DEV_RIGHT] = "RIGHT"
+};
+
+///////////////////////////////////
+/* ���ļ�ͷ���� Private variables �������� */
+static int16_t BaseMap_L[64] = {116, 115, 114, 114, 115, 114, 114, 116,
+								114, 114, 113, 112, 113, 113, 113, 113,
+								112, 112, 112, 112, 112, 112, 111, 113,
+								112, 110, 111, 109, 111, 111, 110, 112,
+								109, 109, 109, 104, 107, 109, 110, 110,
+								108, 108, 109, 108, 108, 108, 109, 109,
+								107, 107, 106, 107, 108, 108, 107, 108,
+								108, 106, 106, 105, 107, 105, 106, 107
+								}; // �洢��ഫ����У׼��׼ֵ
+static int16_t BaseMap_R[64] = {105, 104, 105, 103, 104, 103, 103, 104,
+								105, 105, 104, 104, 103, 102, 103, 103,
+								105, 105, 104, 103, 103, 102, 103, 102,
+								105, 104, 103, 99,  101, 101, 102, 102,
+								104, 104, 103, 102, 102, 103, 102, 102,
+								105, 104, 102, 103, 103, 102, 102, 103,
+								105, 106, 103, 104, 103, 102, 102, 102,
+								105, 104, 103, 103, 102, 101, 103, 103,
+								}; // �洢�Ҳഫ����У׼��׼ֵ
+static uint8_t Is_Calibrated = 1;   // У׼״̬��־λ
+
+
+static const float CosMap[64] = 
+{
+    0.93, 0.95, 0.97, 0.98, 0.98, 0.97, 0.95, 0.93,
+    0.95, 0.97, 0.98, 0.99, 0.99, 0.98, 0.97, 0.95,
+    0.97, 0.98, 0.99, 1.00, 1.00, 0.99, 0.98, 0.97,
+    0.98, 0.99, 1.00, 1.00, 1.00, 1.00, 0.99, 0.98,
+    0.98, 0.99, 1.00, 1.00, 1.00, 1.00, 0.99, 0.98,
+    0.97, 0.98, 0.99, 1.00, 1.00, 0.99, 0.98, 0.97,
+    0.95, 0.97, 0.98, 0.99, 0.99, 0.98, 0.97, 0.95,
+    0.93, 0.95, 0.97, 0.98, 0.98, 0.97, 0.95, 0.93
+};
+
+
+/* ˳�㶨��һ����Щ�꣬��ֹ���汨�� */
+#define NOISE_THRESHOLD 8     // ����������ֵ (mm)
+#define TRAY_FULL_HEIGHT 100  // �ż������� (mm)
+
+
+
+/* Private function prototypes -----------------------------------------------*/
+static void MX_53L8A1_MultiSensorRanging_Init(void);
+static void MX_53L8A1_MultiSensorRanging_Process(void);
+
+static void print_result(RANGING_SENSOR_Result_t *Result);
+static void write_lowpower_pin(uint8_t device, GPIO_PinState pin_state);
+static void reset_all_sensors(void);
+static void print_merged_result(RANGING_SENSOR_Result_t *L, RANGING_SENSOR_Result_t *R);
+static void _sort_8(int16_t *arr);
+void Process_16Columns_Robust(RANGING_SENSOR_Result_t *L, RANGING_SENSOR_Result_t *R, float *out_heights);
+static void print_compensated_height_matrix(RANGING_SENSOR_Result_t *L, RANGING_SENSOR_Result_t *R);
+float Calculate_Tray_Saturation(float *col_heights);
+void Serial_Output_For_Python(float *cols, float sat);
+
+void MX_TOF_Init(void)
+{
+  /* USER CODE BEGIN SV */
+
+  /* USER CODE END SV */
+
+  /* USER CODE BEGIN TOF_Init_PreTreatment */
+
+  /* USER CODE END TOF_Init_PreTreatment */
+
+  /* Initialize the peripherals and the TOF components */
+
+  MX_53L8A1_MultiSensorRanging_Init();
+
+  /* USER CODE BEGIN TOF_Init_PostTreatment */
+
+  /* USER CODE END TOF_Init_PostTreatment */
+}
+
+/*
+ * LM background task
+ */
+void MX_TOF_Process(void)
+{
+  /* USER CODE BEGIN TOF_Process_PreTreatment */
+
+  /* USER CODE END TOF_Process_PreTreatment */
+
+  MX_53L8A1_MultiSensorRanging_Process();
+
+  /* USER CODE BEGIN TOF_Process_PostTreatment */
+
+  /* USER CODE END TOF_Process_PostTreatment */
+}
+
+static void MX_53L8A1_MultiSensorRanging_Init(void)
+{
+  uint8_t device;
+  uint16_t i2c_addr;
+  uint32_t id;
+
+  /* Initialize Virtual COM Port */
+  BSP_COM_Init(COM1);
+
+  printf("53L8A1 Multi Sensor Ranging demo application\n");
+
+  reset_all_sensors();
+
+  /* Turn off all the sensors */
+  for (device = 0; device < RANGING_SENSOR_INSTANCES_NBR; device++)
+  {
+    write_lowpower_pin(device, GPIO_PIN_RESET);
+  }
+
+  /* initializes each device and put it in low power mode */
+  for (device = 0; device < RANGING_SENSOR_INSTANCES_NBR; device++)
+  {
+    /* enable only one sensor */
+    write_lowpower_pin(device, GPIO_PIN_SET);
+    HAL_Delay(2);
+
+	  printf("Initialize sensor %s\n", TofDevStr[device]);
+    status = VL53L8A1_RANGING_SENSOR_Init(device);
+
+    if (status != BSP_ERROR_NONE)
+    {
+      printf("VL53L8A1_RANGING_SENSOR_Init %d failed\n", device);
+      ToF_Present[device] = 0; /* device not detected */
+    }
+    else
+    {
+      ToF_Present[device] = 1; /* device detected */
+    }
+    // ��� ID ȷ��ͨѶ����
+      //VL53L8A1_RANGING_SENSOR_ReadID(device, &id);
+      // printf("ToF sensor %d - ID: %04lX\n", device, (unsigned long)id);
+
+    write_lowpower_pin(device, GPIO_PIN_RESET); /* turn off the device */
+  }
+
+  /* power on the devices one at a time and change their address
+   * once the address is updated, the communication with the devices is checked
+   * reading its ID.
+   */
+  for (device = 0; device < RANGING_SENSOR_INSTANCES_NBR; device++)
+  {
+    /* skip the sensor if init not successful */
+    if (ToF_Present[device] == 0) { continue; }
+
+    /* turn on the device */
+    write_lowpower_pin(device, GPIO_PIN_SET);
+
+    /* left: 0x54, center: 0x56, right: 0x58 */
+    i2c_addr = (RANGING_SENSOR_VL53L8CX_ADDRESS + (device + 1) * 2);
+	  printf("Set sensor %s I2C address to 0X%x\n", TofDevStr[device], i2c_addr);
+    VL53L8A1_RANGING_SENSOR_SetAddress(device, i2c_addr);
+
+    /* check the communication with the device reading the ID */
+    VL53L8A1_RANGING_SENSOR_ReadID(device, &id);
+    printf("ToF sensor %d - ID: %04lX\n", device, (unsigned long)id);
+  }
+}
+
+
+//static void MX_53L8A1_MultiSensorRanging_Process(void)
+//{
+//  uint8_t i;
+//  static RANGING_SENSOR_Result_t Result_L;
+//  static RANGING_SENSOR_Result_t Result_R;
+//  uint8_t has_L = 0;
+//  uint8_t has_R = 0;
+//  float feature_columns[16];
+
+//  Profile.RangingProfile = RS_PROFILE_8x8_CONTINUOUS;
+//  Profile.TimingBudget = TIMING_BUDGET;
+//  Profile.Frequency = RANGING_FREQUENCY;
+//  Profile.EnableAmbient = 0;
+//  Profile.EnableSignal = 0;
+
+//  // --- 1. ���������� ---
+//  for (i = 0; i < RANGING_SENSOR_INSTANCES_NBR; i++)
+//  {
+//    if (i == VL53L8A1_DEV_CENTER) continue; 
+//    if (ToF_Present[i] != 1) continue;
+
+//    VL53L8A1_RANGING_SENSOR_ConfigProfile(i, &Profile);
+//    status = VL53L8A1_RANGING_SENSOR_Start(i, RS_MODE_BLOCKING_CONTINUOUS);
+//    
+//    if (status != BSP_ERROR_NONE) {
+//      printf("Sensor %d Start Failed!\n", i);
+//    }
+//  }
+//  
+//  //  // --- 2. �Զ�У׼�׶� (����������ִ��) ---
+//  printf("Waiting for sensor stability (3s)...\n");
+//  HAL_Delay(3000); // �ȴ��������ȶ�
+
+//  printf("System Ready. Using Fixed Calibration Map.\n");
+
+//  // --- 2. ֱ�ӽ�����ʽ����ѭ�� ---
+//  while (1)
+//  {
+//    // ÿ��ѭ�������־λ
+//    has_L = 0; 
+//    has_R = 0;
+
+//    // ��ȡ�������
+//    if (VL53L8A1_RANGING_SENSOR_GetDistance(VL53L8A1_DEV_LEFT, &Result_L) == BSP_ERROR_NONE) 
+//    {
+//      has_L = 1;
+//    }
+
+//    // ��ȡ�Ҳ�����
+//    if (VL53L8A1_RANGING_SENSOR_GetDistance(VL53L8A1_DEV_RIGHT, &Result_R) == BSP_ERROR_NONE) 
+//    {
+//      has_R = 1;
+//    }
+
+//    // ֻ�е����߶��õ�������ʱ�ż��㣨ͬ��������
+//    if (has_L && has_R) 
+//    {
+//      // 16��³���Ը߶���ȡ
+//      Process_16Columns_Robust(&Result_L, &Result_R, feature_columns);
+//      
+//      // ���㱥�Ͷ�
+//      float saturation = Calculate_Tray_Saturation(feature_columns);
+//      
+//      // �������
+//      printf("\033[H"); // ��긴λ
+//      printf("=== Tray Monitoring System ===\n");
+//      printf("Saturation: %.2f%%  |  Max Height: %.1f mm\n", saturation, feature_columns[8]);
+//      
+//      // ��ѡ��������뿴16�еĸ߶ȷֲ������Խ⿪�����ѭ��
+//      /*
+//      printf("Profile: ");
+//      for(int c=0; c<16; c++) printf("%.0f ", feature_columns[c]);
+//      printf("\n");
+//      */
+
+//      print_compensated_height_matrix(&Result_L, &Result_R); // ʵʱ��ʾ������
+//      // ���͸� Python ��λ��
+//      Serial_Output_For_Python(feature_columns, saturation);
+//      // ������ʱ
+//      HAL_Delay(50);
+//    }
+//  }
+//}
+
+/* ע�⣺��ȷ���� app_tof.c �Ķ���������ͷ�ļ��·�������������ȫ��/��̬���� */
+extern float sat;               // ���� main.c �ж����ȫ�ֱ��Ͷȱ���
+static uint8_t sensors_started = 0; // ����������״̬��־λ
+static RANGING_SENSOR_ProfileConfig_t Profile; // ���������ýṹ��
+
+
+/**
+  * @brief  �޸ĺ�ķ�����ʽ��ദ������
+  * @note   ɾ�����ڲ� while(1)���� main.c �� while(1) ����ѭ��
+  */
+static void MX_53L8A1_MultiSensorRanging_Process(void)
+{
+  uint8_t i;
+  int32_t status;
+  static RANGING_SENSOR_Result_t Result_L;
+  static RANGING_SENSOR_Result_t Result_R;
+  uint8_t has_L = 0;
+  uint8_t has_R = 0;
+  float feature_columns[16];
+
+  // --- 1. ����/��ʼ���׶� (���ڵ�һ�ν���ʱִ��) ---
+  if (sensors_started == 0) 
+  {
+    // ���ò���
+    Profile.RangingProfile = RS_PROFILE_8x8_CONTINUOUS;
+    Profile.TimingBudget = 20;    // ������� TIMING_BUDGET �궨���޸�
+    Profile.Frequency = RANGING_FREQUENCY;       // ������� RANGING_FREQUENCY �궨���޸�
+    Profile.EnableAmbient = 0;
+    Profile.EnableSignal = 0;
+
+    printf("Starting Sensors...\n");
+    for (i = 0; i < RANGING_SENSOR_INSTANCES_NBR; i++)
+    {
+      if (i == VL53L8A1_DEV_CENTER) continue; 
+      if (ToF_Present[i] != 1) continue;
+
+      VL53L8A1_RANGING_SENSOR_ConfigProfile(i, &Profile);
+      status = VL53L8A1_RANGING_SENSOR_Start(i, RS_MODE_BLOCKING_CONTINUOUS);
+      
+      if (status != BSP_ERROR_NONE) {
+        printf("Sensor %d Start Failed! Status: %ld\n", i, status);
+      }
+    }
+    
+    printf("Waiting for sensor stability (3s)...\n");
+    HAL_Delay(3000); 
+    printf("System Ready. Continuous Scanning Started.\n");
+    
+    sensors_started = 1; // ����Ѿ���
+    return; // ��һ��������ɣ����� main ѭ��
+  }
+
+  // --- 2. ���ݲɼ��׶� (���� main ѭ���ڲ�ͣ���ã����ﲻ����Ҫ while(1)) ---
+  
+  // ���Ի�ȡ��ഫ��������
+  if (VL53L8A1_RANGING_SENSOR_GetDistance(VL53L8A1_DEV_LEFT, &Result_L) == BSP_ERROR_NONE) 
+  {
+    has_L = 1;
+  }
+
+  // ���Ի�ȡ�Ҳഫ��������
+  if (VL53L8A1_RANGING_SENSOR_GetDistance(VL53L8A1_DEV_RIGHT, &Result_R) == BSP_ERROR_NONE) 
+  {
+    has_R = 1;
+  }
+
+  // --- 3. �㷨��������� ---
+  // ֻ�е����߶�������ͬ��ʱ���Ž��м��㣨��ֹ������˸�����ݲ����룩
+  if (has_L && has_R) 
+  {
+    // A. ��ȡ16�и߶�����
+    Process_16Columns_Robust(&Result_L, &Result_R, feature_columns);
+    
+    // B. �������̱��Ͷ�
+    float saturation_val = Calculate_Tray_Saturation(feature_columns);
+    
+    // C. ��Ҫ��ͬ����ȫ�ֱ��� sat���� main.c ���ƶ��ϴ��߼���ȡ
+    sat = saturation_val; 
+
+    // D. �����ն���ʾ (��̬ˢ��Ч��)
+    printf("\033[H"); // ANSI ת���룺��긴λ�����Ͻ�
+    printf("=== Tray Monitoring System ===\n");
+    printf("Saturation: %.2f%%  |  Max Height: %.1f mm\n", saturation_val, feature_columns[8]);
+    
+    // E. �����ͼ��ʾ
+    print_compensated_height_matrix(&Result_L, &Result_R); 
+    
+    // F. ����ԭʼ���� (�� Python �� ����ʹ��)
+    Serial_Output_For_Python(feature_columns, saturation_val);
+  }
+
+  // ����ִ����ϣ��Զ����� main.c �� while(1) 
+  // ��һȦѭ�����ٴν������ʵ�֡�����������
+}
+
+
+
+static void print_merged_result(RANGING_SENSOR_Result_t *L, RANGING_SENSOR_Result_t *R)
+{
+  int8_t row, col;
+  uint8_t zones_per_line = 8; // 8x8 ģʽ�̶�Ϊ 8
+
+  // 1. ��ӡ�����ָ����� (16�п�)
+  for (col = 0; col < zones_per_line * 2; col++) printf("------");
+  printf("--\n");
+
+  // 2. ���д�ӡ����
+  for (row = 0; row < zones_per_line; row++)
+  {
+    // --- ��ӡ�󴫸���(L)����һ�� ---
+    for (col = (zones_per_line - 1); col >= 0; col--)
+    {
+      uint8_t zone_idx = (row * zones_per_line) + col;
+      if (L->ZoneResult[zone_idx].NumberOfTargets > 0)
+        printf("%4ld ", (long)L->ZoneResult[zone_idx].Distance[0]);
+      else
+        printf("   X ");
+    }
+
+    // --- ���ҷָ�� ---
+    printf(" | ");
+
+    // --- ��ӡ�Ҵ�����(R)����һ�� ---
+    for (col = (zones_per_line - 1); col >= 0; col--)
+    {
+      uint8_t zone_idx = (row * zones_per_line) + col;
+      if (R->ZoneResult[zone_idx].NumberOfTargets > 0)
+        printf("%4ld ", (long)R->ZoneResult[zone_idx].Distance[0]);
+      else
+        printf("   X ");
+    }
+    printf("\n");
+  }
+
+  // 3. ��ӡ�ײ��ָ�����
+  for (col = 0; col < zones_per_line * 2; col++) printf("------");
+  printf("--\n");
+}
+
+/**
+ * @brief ��ӡ�������ʵʱ�߶Ⱦ���Base - Raw��* Cos
+ * �������ż�ʱ������������Ӧ��ȫ�� 0
+ */
+static void print_compensated_height_matrix(RANGING_SENSOR_Result_t *L, RANGING_SENSOR_Result_t *R)
+{
+    int8_t row, col;
+    uint8_t zones_per_line = 8;
+
+    printf("\n--- Compensated Height Map (LEFT | RIGHT) [Unit: mm] ---\n");
+    for (col = 0; col < zones_per_line * 2; col++) printf("-----");
+    printf("\n");
+
+    for (row = 0; row < zones_per_line; row++)
+    {
+        // --- ��ӡ�󴫸����߶� (���������Է���������λ) ---
+        for (col = (zones_per_line - 1); col >= 0; col--)
+        {
+            uint8_t idx = (row * zones_per_line) + col;
+            int16_t diff = BaseMap_L[idx] - L->ZoneResult[idx].Distance[0];
+            float h = (diff > 0) ? (float)diff * CosMap[idx] : 0; // ���˸�ֵ
+            
+            // ����ź���Ч����ӡ X
+            if (L->ZoneResult[idx].NumberOfTargets > 0)
+                printf("%3.0f  ", h);
+            else
+                printf("  X  ");
+        }
+
+        printf(" | ");
+
+        // --- ��ӡ�Ҵ������߶� ---
+        for (col = (zones_per_line - 1); col >= 0; col--)
+        {
+            uint8_t idx = (row * zones_per_line) + col;
+            int16_t diff = BaseMap_R[idx] - R->ZoneResult[idx].Distance[0];
+            float h = (diff > 0) ? (float)diff * CosMap[idx] : 0;
+            
+            if (R->ZoneResult[idx].NumberOfTargets > 0)
+                printf("%3.0f  ", h);
+            else
+                printf("  X  ");
+        }
+        printf("\n");
+    }
+
+    for (col = 0; col < zones_per_line * 2; col++) printf("-----");
+    printf("\n");
+}
+
+
+static void print_result(RANGING_SENSOR_Result_t *Result)
+{
+  int8_t i;
+  int8_t j;
+  int8_t k;
+  int8_t l;
+  uint8_t zones_per_line;
+
+  zones_per_line = ((Profile.RangingProfile == RS_PROFILE_8x8_AUTONOMOUS) ||
+                    (Profile.RangingProfile == RS_PROFILE_8x8_CONTINUOUS)) ? 8 : 4;
+
+  printf("Cell Format :\n\n");
+  for (l = 0; l < RANGING_SENSOR_NB_TARGET_PER_ZONE; l++)
+  {
+    printf(" \033[38;5;10m%20s\033[0m : %20s\n", "Distance [mm]", "Status");
+    if ((Profile.EnableAmbient != 0) || (Profile.EnableSignal != 0))
+    {
+      printf(" %20s : %20s\n", "Signal [kcps/spad]", "Ambient [kcps/spad]");
+    }
+  }
+
+  printf("\n\n");
+
+  for (j = 0; j < Result->NumberOfZones; j += zones_per_line)
+  {
+    for (i = 0; i < zones_per_line; i++) /* number of zones per line */
+    {
+      printf(" -----------------");
+    }
+    printf("\n");
+
+    for (i = 0; i < zones_per_line; i++)
+    {
+      printf("|                 ");
+    }
+    printf("|\n");
+
+    for (l = 0; l < RANGING_SENSOR_NB_TARGET_PER_ZONE; l++)
+    {
+      /* Print distance and status */
+      for (k = (zones_per_line - 1); k >= 0; k--)
+      {
+        if (Result->ZoneResult[j + k].NumberOfTargets > 0)
+          printf("| \033[38;5;10m%5ld\033[0m  :  %5ld ",
+                 (long)Result->ZoneResult[j + k].Distance[l],
+                 (long)Result->ZoneResult[j + k].Status[l]);
+        else
+          printf("| %5s  :  %5s ", "X", "X");
+      }
+      printf("|\n");
+
+      if ((Profile.EnableAmbient != 0) || (Profile.EnableSignal != 0))
+      {
+        /* Print Signal and Ambient */
+        for (k = (zones_per_line - 1); k >= 0; k--)
+        {
+          if (Result->ZoneResult[j + k].NumberOfTargets > 0)
+          {
+            if (Profile.EnableSignal != 0)
+            {
+              printf("| %5ld  :  ", (long)Result->ZoneResult[j + k].Signal[l]);
+            }
+            else
+              printf("| %5s  :  ", "X");
+
+            if (Profile.EnableAmbient != 0)
+            {
+              printf("%5ld ", (long)Result->ZoneResult[j + k].Ambient[l]);
+            }
+            else
+              printf("%5s ", "X");
+          }
+          else
+            printf("| %5s  :  %5s ", "X", "X");
+        }
+        printf("|\n");
+      }
+    }
+  }
+
+  for (i = 0; i < zones_per_line; i++)
+  {
+    printf(" -----------------");
+  }
+  printf("\n");
+}
+
+static void write_lowpower_pin(uint8_t device, GPIO_PinState pin_state)
+{
+  switch (device)
+  {
+//    case VL53L8A1_DEV_CENTER:
+//      HAL_GPIO_WritePin(VL53L8A1_LPn_C_PORT, VL53L8A1_LPn_C_PIN, pin_state);
+//      break;
+
+    case VL53L8A1_DEV_LEFT:
+      HAL_GPIO_WritePin(VL53L8A1_LPn_L_PORT, VL53L8A1_LPn_L_PIN, pin_state);
+      break;
+
+    case VL53L8A1_DEV_RIGHT:
+      HAL_GPIO_WritePin(VL53L8A1_LPn_R_PORT, VL53L8A1_LPn_R_PIN, pin_state);
+      break;
+
+    default:
+      break;
+  }
+}
+
+static void reset_all_sensors(void)
+{
+//  HAL_GPIO_WritePin(VL53L8A1_PWR_EN_C_PORT, VL53L8A1_PWR_EN_C_PIN, GPIO_PIN_RESET);
+//  HAL_GPIO_WritePin(VL53L8A1_PWR_EN_L_PORT, VL53L8A1_PWR_EN_L_PIN, GPIO_PIN_RESET);
+//  HAL_GPIO_WritePin(VL53L8A1_PWR_EN_R_PORT, VL53L8A1_PWR_EN_R_PIN, GPIO_PIN_RESET);
+//  HAL_Delay(2);
+
+//  HAL_GPIO_WritePin(VL53L8A1_PWR_EN_C_PORT, VL53L8A1_PWR_EN_C_PIN, GPIO_PIN_SET);
+//  HAL_GPIO_WritePin(VL53L8A1_PWR_EN_L_PORT, VL53L8A1_PWR_EN_L_PIN, GPIO_PIN_SET);
+//  HAL_GPIO_WritePin(VL53L8A1_PWR_EN_R_PORT, VL53L8A1_PWR_EN_R_PIN, GPIO_PIN_SET);
+//  HAL_Delay(2);
+
+//  HAL_GPIO_WritePin(VL53L8A1_LPn_C_PORT, VL53L8A1_LPn_C_PIN, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(VL53L8A1_LPn_L_PORT, VL53L8A1_LPn_L_PIN, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(VL53L8A1_LPn_R_PORT, VL53L8A1_LPn_R_PIN, GPIO_PIN_RESET);
+  HAL_Delay(2);
+
+//  HAL_GPIO_WritePin(VL53L8A1_LPn_C_PORT, VL53L8A1_LPn_C_PIN, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(VL53L8A1_LPn_L_PORT, VL53L8A1_LPn_L_PIN, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(VL53L8A1_LPn_R_PORT, VL53L8A1_LPn_R_PIN, GPIO_PIN_SET);
+  HAL_Delay(2);
+}
+//////////////////////////////////////////////////////////////////////////////�Լ��Ĵ�����
+
+/* ð������������������8�����ݼ��죩 */
+static void _sort_8(int16_t *arr) 
+{
+    int16_t temp;
+    for (int i = 0; i < 7; i++) 
+	{
+        for (int j = 0; j < 7 - i; j++) 
+		{
+            if (arr[j] > arr[j + 1]) 
+			{
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+
+void Process_16Columns_Robust(RANGING_SENSOR_Result_t *L, RANGING_SENSOR_Result_t *R, float *out_heights)
+{
+    int16_t col_buffer[8];
+    uint8_t zones_per_line = 8;
+
+    // ����16�� (0-7���󴫸���, 8-15���Ҵ�����)
+    for (int col = 0; col < 16; col++) 
+    {
+        // 1. ��ȡ�����ڳ��ȷ����ϵ�8����
+        for (int row = 0; row < 8; row++) 
+        {
+            int zone_idx = (row * zones_per_line) + (col % 8);
+            int16_t raw_dist, base_dist;
+
+            if (col < 8) { // ���
+                raw_dist = L->ZoneResult[zone_idx].Distance[0];
+                base_dist = BaseMap_L[zone_idx];
+            } else { // �Ҳ�
+                raw_dist = R->ZoneResult[zone_idx].Distance[0];
+                base_dist = BaseMap_R[zone_idx];
+            }
+
+            // --- �޸Ĳ��ֿ�ʼ ---
+            // 1.1 ����ԭʼ����������룩
+            int16_t diff = base_dist - raw_dist;
+            if (diff < 0) diff = 0; 
+
+            // 1.2 Ӧ�����Ҳ�������ֱ�߶� = �������� * cos(theta)
+            // ʹ���㶨��� CosMap ����
+            float corrected_h = (float)diff * CosMap[zone_idx];
+            
+            // 1.3 ���뻺����к����˲�
+            col_buffer[row] = (int16_t)corrected_h;
+            // --- �޸Ĳ��ֽ��� ---
+        }
+
+        // 2. ��ֵ�˲�
+        _sort_8(col_buffer);
+
+        // 3. ����ƽ����ȡ�м�4�����ƽ��ֵ
+        float robust_avg = (col_buffer[2] + col_buffer[3] + col_buffer[4] + col_buffer[5]) / 4.0f;
+        
+        out_heights[col] = robust_avg;
+    }
+}
+
+float Calculate_Tray_Saturation(float *col_heights)
+{
+    float current_area = 0;
+    float col_width = 12.5f;   // ÿ�п��� 12.5mm
+    float max_height = 100.0f; // �ż���� 100mm
+    float total_tray_area = 200.0f * 100.0f; // �ܽ���� 20000 mm^2
+
+    for (int i = 0; i < 16; i++) {
+        // ÿһ�еĽ���� = ����³���߶� * �п�
+        // ���Ƹ߶Ȳ������żܸ߶�
+        float h = col_heights[i];
+        if (h > max_height) h = max_height;
+        
+        current_area += (h * col_width);
+    }
+
+    // �ռ�ռ���� = (��ǰ����� / �ܽ����) * 100%
+	
+	
+    return (current_area / total_tray_area) * 100.0f;
+}
+
+// �������ļ�ĩβ�������С����
+void Serial_Output_For_Python(float *cols, float sat) 
+{
+    // ʹ���ض�ǰ׺ @DATA ���� Python ���˵���ʼ����Ϣ
+    printf("@DATA:"); 
+    for(int i = 0; i < 16; i++) 
+    {
+        printf("%.1f,", cols[i]);
+    }
+    printf("%.2f\n", sat); // ��β����
+}
+
+
+#ifdef __cplusplus
+}
+#endif

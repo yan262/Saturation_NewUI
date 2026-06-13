@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电缆桥架饱和度监控</title>
+    <link rel="stylesheet" href="/static/css/fonts.css">
+    <script src="/static/js/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- ====== 登录守卫: 无 token 则跳转回登录页 ====== -->
+    <script src="/static/js/auth.js"></script>
+    <script>Auth.guard();</script>
+    <canvas id="particles-canvas"></canvas>
+    <div id="alarm-glow-bar"></div>
+
+    <header id="header">
+        <div class="header-left">
+            <span class="header-icon">⚡</span>
+            <h1 class="header-title">电缆桥架饱和度监控平台</h1>
+        </div>
+        <div class="header-center">
+            <span id="online-badge" class="badge badge-warn">◉ 检测中...</span>
+            <span id="ws-badge" class="badge badge-warn">⬡ 连接中...</span>
+            <span class="header-info" id="last-update">等待首次采集...</span>
+        </div>
+        <div class="header-right">
+            <button class="btn-glass" id="btn-admin" style="display:none" onclick="Admin.open()">🔑 管理</button>
+            <span class="header-info" id="clock">--:--:--</span>
+            <button class="btn-glass btn-logout" onclick="Auth.logout()" title="退出登录">↪ 退出</button>
+        </div>
+    </header>
+
+    <main id="main-row">
+        <section id="gauge-section">
+            <div id="gauge-container"></div>
+        </section>
+
+        <section id="value-section">
+            <div class="glass-card" id="current-value-card">
+                <div class="card-label">📊 实时饱和度</div>
+                <div class="card-big-value" id="current-value">--.-</div>
+                <div class="card-unit">%</div>
+                <div class="card-delta" id="delta-text">等待采集...</div>
+            </div>
+        </section>
+
+        <section id="chart-section">
+            <div class="glass-card chart-card">
+                <div class="card-label">📈 饱和度趋势</div>
+                <canvas id="trend-chart"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <section id="progress-section">
+        <div class="glass-card" id="progress-card">
+            <div class="card-label">📏 实时饱和度（报警阈值: <span id="threshold-label">85</span>%）</div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progress-fill"></div>
+                <!-- 报警阈值刻度线 -->
+                <div class="progress-threshold" id="progress-threshold">
+                    <span class="progress-threshold-label">🚨 阈值 <span id="threshold-marker">85</span>%</span>
+                </div>
+            </div>
+            <div class="progress-labels">
+                <span>0%</span>
+                <span id="progress-text">--.-% / --%</span>
+                <span>100%</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats-section">
+        <div class="glass-card stat-card">
+            <div class="card-label">📈 平均值</div>
+            <div class="stat-value" id="stat-avg">--.-<small>%</small></div>
+            <div class="stat-trend" id="stat-trend"></div>
+        </div>
+        <div class="glass-card stat-card">
+            <div class="card-label">🔺 最大值</div>
+            <div class="stat-value text-red" id="stat-max">--.-<small>%</small></div>
+            <div class="stat-time" id="stat-max-time"></div>
+        </div>
+        <div class="glass-card stat-card">
+            <div class="card-label">🔽 最小值</div>
+            <div class="stat-value text-green" id="stat-min">--.-<small>%</small></div>
+            <div class="stat-time" id="stat-min-time"></div>
+        </div>
+        <div class="glass-card stat-card">
+            <div class="card-label">📋 采样次数</div>
+            <div class="stat-value" id="stat-count">0</div>
+        </div>
+    </section>
+
+    <section id="log-section">
+        <div class="glass-card log-card">
+            <div class="log-header">
+                <span class="card-label">⚠ 报警日志（最近5条）</span>
+                <div class="log-actions">
+                    <button class="btn-glass" id="btn-export">📥 导出 CSV</button>
+                    <button class="btn-glass" id="btn-settings">⚙ 设置</button>
+                </div>
+            </div>
+            <div id="log-list">
+                <div class="log-empty">暂无报警记录</div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <span>🔄 刷新: <strong id="footer-rate">2</strong>s</span>
+        <span>🚨 阈值: <strong id="footer-threshold">85</strong>%</span>
+        <span class="footer-tech">FastAPI + OneNet 云平台</span>
+    </footer>
+
+    <div id="settings-overlay" class="overlay hidden">
+        <div class="glass-card settings-dialog">
+            <h2>⚙ 监控设置</h2>
+            <div class="setting-row">
+                <label>🔄 刷新频率（秒）</label>
+                <input type="range" id="setting-rate" min="1" max="30" value="2">
+                <span id="setting-rate-val">2</span>
+            </div>
+            <div class="setting-row">
+                <label>🚨 报警阈值（%）</label>
+                <input type="range" id="setting-threshold" min="10" max="100" value="85">
+                <span id="setting-threshold-val">85</span>
+            </div>
+            <div class="setting-actions">
+                <button class="btn-glass" id="btn-save-settings">保存</button>
+                <button class="btn-glass" id="btn-close-settings">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== 管理面板（默认隐藏，点击顶栏"🔑 管理"打开）====== -->
+    <div id="admin-panel" class="overlay hidden">
+        <div class="glass-card admin-dialog">
+            <div class="admin-tabs-bar">
+                <button class="admin-tab active" data-tab="users" onclick="Admin.switchAdminTab('users')">📋 用户管理</button>
+                <button class="admin-tab" data-tab="roles" onclick="Admin.switchAdminTab('roles')">🔑 角色管理</button>
+                <span style="flex:1"></span>
+                <button class="btn-glass" onclick="Admin.close()">✕</button>
+            </div>
+            <div id="admin-users-tab">
+                <div style="margin-bottom:12px">
+                    <button class="btn-glass" onclick="Admin.editUser(0)">+ 新建用户</button>
+                </div>
+                <table class="admin-table">
+                    <thead><tr>
+                        <th>用户名</th><th>显示名</th><th>认证</th><th>角色</th><th>状态</th><th>操作</th>
+                    </tr></thead>
+                    <tbody id="users-table-body"></tbody>
+                </table>
+            </div>
+            <div id="admin-roles-tab" style="display:none" data-selected-role-id="">
+                <div style="display:flex;gap:16px">
+                    <div id="roles-list" style="flex:0 0 180px;border-right:1px solid rgba(30,60,100,0.3);padding-right:12px"></div>
+                    <div id="role-perms" style="flex:1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-modal" class="overlay hidden"></div>
+
+    <script src="/static/js/gauge.js?v=2"></script>
+    <script src="/static/js/particles.js"></script>
+    <script src="/static/js/app.js?v=2"></script>
+    <script src="/static/js/admin.js?v=3"></script>
+</body>
+</html>

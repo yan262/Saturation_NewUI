@@ -1,0 +1,835 @@
+/* ============================================================
+   暗色科技风样式 — 电缆桥架饱和度监控
+   ============================================================
+   所有带 "★" 标记的 font-size 行可自行调整字号大小。
+   数值越大字越大，改完刷新浏览器即可生效。
+   ========================================================= */
+
+/* ===== CSS Variables ===== */
+:root {
+    --bg-deep: #060b14;                        /* 页面主背景色 */
+    --card-bg: rgba(10, 25, 50, 0.6);          /* 卡片半透明背景 */
+    --card-border: rgba(30, 60, 100, 0.5);     /* 卡片边框色 */
+    --cyan: #00e5ff;                           /* 青蓝强调色 */
+    --green: #00ff88;                          /* 绿色（正常/安全） */
+    --yellow: #ffaa00;                         /* 黄色（警告） */
+    --red: #ff3333;                            /* 红色（危险/报警） */
+    --text-primary: #e0e8f0;                   /* 主文字颜色 */
+    --text-secondary: #5a7a9a;                 /* 次要文字颜色 */
+    --glow-cyan: 0 0 20px rgba(0, 229, 255, 0.3);
+    --glow-red: 0 0 30px rgba(255, 51, 51, 0.5);
+    --font-mono: 'JetBrains Mono', monospace;   /* 等宽字体（日志、徽章） */
+    --font-display: 'Orbitron', monospace;      /* 科技感字体（数值显示） */
+}
+
+/* ===== Reset ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    height: 100vh;
+    overflow: hidden;                          /* 禁止页面滚动 */
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 18px;                           /* ★ 页面全局基础字号 */
+}
+
+/* ===== Particle Canvas ===== */
+#particles-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;                      /* 不影响鼠标点击 */
+}
+
+/* ===== 报警呼吸光条（页面顶部细线）===== */
+#alarm-glow-bar {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: transparent;
+    z-index: 1000;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+#alarm-glow-bar.active {
+    background: var(--red);
+    box-shadow: 0 0 20px var(--red), 0 0 60px rgba(255, 51, 51, 0.6);
+    animation: alarm-pulse 1.5s ease-in-out infinite;   /* 红色呼吸闪烁 */
+}
+
+@keyframes alarm-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* ===== 页眉 ===== */
+#header {
+    position: relative; z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 24px;
+    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 6px;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 0 0 auto;
+}
+.header-center {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 0 0 auto;
+}
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 auto;
+}
+.header-icon { font-size: 32px; }              /* ★ 页眉 ⚡ 图标大小 */
+.header-title {
+    font-size: 22px;                           /* ★ 页眉标题 */
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+.header-info {
+    font-size: 16px;                           /* ★ 页眉信息（时钟、上次更新） */
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+}
+#last-update {
+    font-size: 14px;
+    color: #4a6a8a;
+    font-family: var(--font-mono);
+}
+.btn-logout {
+    font-size: 14px;
+    padding: 4px 12px;
+    border-color: rgba(255,51,51,0.25);
+    color: #ff6666;
+}
+.btn-logout:hover {
+    background: rgba(255,51,51,0.12);
+    box-shadow: 0 0 12px rgba(255,51,51,0.15);
+}
+
+/* ===== 状态徽章 ===== */
+.badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 10px;
+    font-size: 18px;                           /* ★ 在线/离线徽章文字 */
+    font-weight: 600;
+    font-family: var(--font-mono);
+}
+.badge-normal {
+    background: rgba(0, 255, 136, 0.15);
+    color: var(--green);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+}
+.badge-warn {
+    background: rgba(255, 170, 0, 0.15);
+    color: var(--yellow);
+    border: 1px solid rgba(255, 170, 0, 0.3);
+}
+.badge-danger {
+    background: rgba(255, 51, 51, 0.15);
+    color: var(--red);
+    border: 1px solid rgba(255, 51, 51, 0.3);
+}
+
+/* ===== 玻璃质感卡片 ===== */
+.glass-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    backdrop-filter: blur(8px);                /* 背景模糊（毛玻璃效果） */
+    -webkit-backdrop-filter: blur(8px);
+}
+.card-label {
+    font-size: 24px;                           /* ★ 卡片顶部标签文字（如 "📊 实时饱和度"） */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+/* ===== 主区域三栏布局 ===== */
+#main-row {
+    position: relative; z-index: 1;
+    display: flex;
+    gap: 12px;
+    padding: 0 24px;
+    height: 320px;                             /* 主区域固定高度 */
+}
+#gauge-section {
+    flex: 0 0 300px;                           /* 仪表盘宽度固定 300px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#value-section {
+    flex: 0 0 220px;                           /* 实时值卡片宽度固定 220px */
+    display: flex;
+    align-items: center;
+}
+#chart-section {
+    flex: 1;                                   /* 趋势图占满剩余空间 */
+    min-width: 0;
+    overflow: hidden;                          /* 裁剪溢出，防止图表时间轴压到下方进度条 */
+}
+.chart-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.chart-card canvas {
+    flex: 1;
+    width: 100% !important;
+    max-height: 265px;                         /* 留出空间给卡片内边距和 x 轴标签 */
+}
+
+/* ===== 实时饱和度数值卡片 ===== */
+#current-value-card {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: relative;                        /* 作为标签绝对定位的参考 */
+}
+#current-value-card .card-label {
+    position: absolute;
+    top: 14px;                                 /* 与趋势图卡片内边距对齐 */
+    left: 0; right: 0;
+    margin-bottom: 0;
+}
+.card-big-value {
+    font-family: var(--font-display);
+    font-size: 56px;                           /* ★★★ 实时值大字（主数值 56px） */
+    font-weight: 900;
+    color: var(--cyan);
+    text-shadow: var(--glow-cyan);             /* 青蓝发光 */
+    line-height: 1.1;
+    transition: color 0.5s;
+}
+.card-big-value.alarming {
+    color: var(--red);
+    text-shadow: var(--glow-red);              /* 报警时红色发光 */
+}
+.card-unit {
+    font-family: var(--font-display);
+    font-size: 26px;                           /* ★ 实时值百分号 "%" */
+    color: var(--text-secondary);
+    margin-top: -2px;
+}
+.card-delta {
+    font-size: 22px;                           /* ★ 变化量文字（"▲ 较上次 +1.2%"） */
+    font-family: var(--font-mono);
+    margin-top: 8px;
+    color: var(--text-secondary);
+}
+.card-delta.up { color: var(--red); }          /* 上涨变红 */
+.card-delta.down { color: var(--green); }      /* 下降变绿 */
+
+/* ===== 阈值占用率进度条 ===== */
+#progress-section {
+    position: relative; z-index: 1;
+    padding: 0 24px;
+    margin-top: 16px;                          /* 与图表区域保持间距 */
+}
+.progress-track {
+    position: relative;              /* 为阈值刻度线提供定位参考 */
+    height: 24px;
+    background: rgba(20, 40, 70, 0.8);
+    border-radius: 12px;
+    overflow: visible;               /* 允许刻度线溢出 */
+    border: 1px solid var(--card-border);
+    margin-top: 8px;                 /* 给上方的刻度标签留空间 */
+}
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 12px;
+    background: linear-gradient(90deg, var(--green), var(--yellow));
+    transition: width 0.6s ease, background 0.6s;
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.2);
+}
+.progress-fill.warning {
+    background: linear-gradient(90deg, var(--yellow), var(--red));
+    box-shadow: 0 0 16px rgba(255, 51, 51, 0.4);
+}
+/* 报警阈值刻度线 */
+.progress-threshold {
+    position: absolute;
+    top: -6px;
+    bottom: -6px;
+    left: 85%;                       /* 默认 85%，JS 根据实际阈值动态调整 */
+    transform: translateX(-50%);
+    width: 2px;
+    background: rgba(255,170,0,0.7);
+    z-index: 2;
+    pointer-events: none;
+    transition: left 0.4s ease;
+}
+.progress-threshold-label {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: #ffaa00;
+    white-space: nowrap;
+}
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+    font-size: 16px;                           /* ★ 进度条下方 0% / 值 / 100% 文字 */
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+}
+
+/* ===== 统计卡片（平均值、最大值、最小值、采样次数）===== */
+#stats-section {
+    position: relative; z-index: 1;
+    display: flex;
+    gap: 10px;
+    padding: 0 24px;
+    margin-top: 14px;
+}
+.stat-card {
+    flex: 1;
+    text-align: center;
+}
+.stat-value {
+    font-family: var(--font-display);
+    font-size: 36px;                           /* ★★★ 统计卡片数值（36px） */
+    font-weight: 700;
+    color: var(--cyan);
+}
+.stat-value small {
+    font-size: 18px;                           /* ★ 统计卡片百分号 "%" */
+    color: var(--text-secondary);
+    margin-left: 2px;
+}
+.stat-value.text-red { color: var(--red); }
+.stat-value.text-green { color: var(--green); }
+.stat-trend {
+    font-size: 14px;
+    font-family: var(--font-mono);
+    margin-top: 4px;
+    min-height: 18px;
+}
+.stat-trend.up { color: var(--red); }
+.stat-trend.down { color: var(--green); }
+.stat-trend.neutral { color: var(--text-secondary); }
+.stat-time {
+    font-size: 13px;                           /* ★ 最大值/最小值对应的时间标签 */
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    margin-top: 4px;
+}
+
+/* ===== 报警日志 ===== */
+#log-section {
+    position: relative; z-index: 1;
+    padding: 0 24px;
+    margin-top: 10px;
+}
+.log-card { min-height: 130px; }
+.log-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.log-actions { display: flex; gap: 8px; }
+.btn-glass {
+    background: rgba(0, 229, 255, 0.1);
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    color: var(--cyan);
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;                           /* ★ 按钮文字（导出CSV、设置） */
+    font-family: inherit;
+    transition: all 0.2s;
+}
+.btn-glass:hover {
+    background: rgba(0, 229, 255, 0.2);
+    box-shadow: var(--glow-cyan);
+}
+#log-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.log-entry {
+    font-family: var(--font-mono);
+    font-size: 16px;                           /* ★ 报警日志条目文字 */
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(255, 51, 51, 0.08);
+    border: 1px solid rgba(255, 51, 51, 0.2);
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+.log-entry .time { color: var(--text-secondary); }
+.log-entry .val { font-weight: 600; }
+.log-entry.alarm-high { border-color: rgba(255, 51, 51, 0.5); }
+.log-entry.alarm-high .val { color: var(--red); }
+.log-empty {
+    color: var(--text-secondary);
+    font-size: 22px;                           /* ★ 空日志提示 "暂无报警记录" */
+    padding: 10px 0;
+}
+
+/* ===== 底栏 ===== */
+#footer {
+    position: fixed; bottom: 0; left: 0;
+    width: 100%; z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding: 6px 24px;
+    background: rgba(6, 11, 20, 0.9);
+    border-top: 1px solid var(--card-border);
+    font-size: 13px;                           /* ★ 底栏文字 */
+    color: var(--text-secondary);
+}
+#footer strong { color: var(--text-primary); font-family: var(--font-mono); }
+.footer-tech { color: var(--text-secondary); }
+
+/* ===== 设置弹窗 ===== */
+.overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);               /* 半透明遮罩 */
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.overlay.hidden { display: none; }
+.settings-dialog {
+    width: 380px;
+    padding: 24px;
+}
+.settings-dialog h2 {
+    font-size: 18px;                           /* ★ 设置弹窗标题 "⚙ 监控设置" */
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+.setting-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+.setting-row label {
+    flex: 1;
+    font-size: 14px;                           /* ★ 设置弹窗标签文字 */
+    color: var(--text-secondary);
+}
+.setting-row input[type="range"] { flex: 2; accent-color: var(--cyan); }
+.setting-row span {
+    font-family: var(--font-mono);
+    color: var(--cyan);
+    min-width: 30px;
+    text-align: right;
+}
+.setting-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: flex-end;
+}
+
+/* ===== 登录页面 ===== */
+.login-body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #060b14;
+    color: #e0e8f0;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+.login-wrapper {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+.login-card {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.login-brand {
+    flex: 1;
+    background: linear-gradient(160deg, #070e1a 0%, #0c1f3a 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    border-right: 1px solid rgba(30,60,100,0.3);
+}
+.login-logo {
+    font-size: 96px;
+    margin-bottom: 28px;
+    animation: logo-pulse 3s ease-in-out infinite;
+}
+@keyframes logo-pulse {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+.login-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    color: #00e5ff;
+    text-align: center;
+    white-space: nowrap;
+}
+.login-divider {
+    width: 80px;
+    height: 3px;
+    background: #00e5ff;
+    margin: 28px 0;
+    opacity: 0.5;
+}
+.login-desc {
+    color: #5a7a9a;
+    font-size: 18px;
+    text-align: center;
+    line-height: 2.0;
+}
+.login-version {
+    margin-top: 32px;
+    font-size: 14px;
+    color: #3a5a7a;
+}
+.login-form {
+    flex: 1;
+    background: linear-gradient(180deg, #0c1a30 0%, #081020 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+}
+.login-heading {
+    font-size: 30px;
+    color: #e0e8f0;
+    margin-bottom: 8px;
+}
+.login-subtitle {
+    color: #5a7a9a;
+    font-size: 16px;
+    margin-bottom: 36px;
+}
+.login-tabs {
+    display: flex;
+    margin-bottom: 28px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(30,60,100,0.5);
+}
+.login-tab {
+    flex: 1;
+    text-align: center;
+    padding: 14px 0;
+    background: rgba(20,35,60,0.6);
+    color: #8a9ab0;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    transition: all 0.2s;
+    outline: none;
+}
+.login-tab:hover {
+    color: #c0d0e0;
+}
+.login-tab.active {
+    background: rgba(0,229,255,0.15);
+    color: #00e5ff;
+}
+.login-error {
+    background: rgba(255,51,51,0.1);
+    border: 1px solid rgba(255,51,51,0.3);
+    color: #ff3333;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+.login-error.hidden { display: none; }
+.login-field { margin-bottom: 22px; }
+.login-label {
+    display: block;
+    color: #8a9ab0;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.login-input {
+    width: 100%;
+    background: rgba(10,25,50,0.6);
+    border: 1px solid rgba(30,60,100,0.5);
+    border-radius: 8px;
+    padding: 14px 18px;
+    color: #e0e8f0;
+    font-size: 18px;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+.login-input::placeholder { color: #3a5a7a; }
+.login-input:focus {
+    border-color: #00e5ff;
+    box-shadow: 0 0 14px rgba(0,229,255,0.18), inset 0 0 8px rgba(0,229,255,0.04);
+}
+.login-btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(135deg, #00b8d4, #00e5ff);
+    color: #060b14;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 22px;
+    box-shadow: 0 0 30px rgba(0,229,255,0.3);
+    transition: opacity 0.2s;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.login-btn:hover { opacity: 0.85; }
+.login-btn:disabled { opacity: 0.6; cursor: default; }
+
+/* 登录按钮 loading 旋转动画 */
+.login-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top-color: #060b14;
+    border-radius: 50%;
+    animation: login-spin 0.6s linear infinite;
+}
+@keyframes login-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 密码输入框容器（用于放置显隐切换按钮） */
+.login-pw-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.login-pw-wrap .login-input {
+    padding-right: 48px;         /* 给右侧切换按钮留空间 */
+}
+.login-pw-toggle {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #5a7a9a;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px 12px;
+    line-height: 1;
+    transition: color 0.2s;
+    outline: none;
+}
+.login-pw-toggle:hover {
+    color: #00e5ff;
+}
+.login-footer-text {
+    text-align: center;
+    font-size: 14px;
+    color: #3a5a7a;
+}
+
+/* ===== 管理面板 ===== */
+.admin-dialog {
+    width: 90vw;
+    max-width: 960px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px;
+}
+.admin-tabs-bar {
+    display: flex;
+    gap: 0;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(30,60,100,0.3);
+    padding-bottom: 0;
+    align-items: center;
+}
+.admin-tab {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #5a7a9a;
+    font-size: 17px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+.admin-tab.active {
+    color: #00e5ff;
+    border-bottom-color: #00e5ff;
+}
+.admin-tab:hover { color: #e0e8f0; }
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+.admin-table th {
+    color: #5a7a9a;
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid rgba(30,60,100,0.3);
+    font-weight: 600;
+}
+.admin-table td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(30,60,100,0.1);
+}
+.admin-table code {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(0,229,255,0.05);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 15px;
+}
+.user-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+}
+.user-tag.tag-local { background: rgba(0,229,255,0.1); color: #00e5ff; }
+.user-tag.tag-ldap  { background: rgba(255,170,0,0.1); color: #ffaa00; }
+.status-dot { font-size: 13px; }
+.status-dot.on { color: #00ff88; }
+.status-dot.off { color: #ff3333; }
+.btn-sm { font-size: 15px; padding: 5px 14px; }
+.btn-danger { border-color: rgba(255,51,51,0.3); color: #ff3333; }
+.btn-danger:hover { background: rgba(255,51,51,0.15); }
+.role-item {
+    padding: 10px 12px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #e0e8f0;
+    margin-bottom: 2px;
+}
+.role-item:hover { background: rgba(0,229,255,0.05); }
+.role-item.selected { background: rgba(0,229,255,0.08); color: #00e5ff; }
+
+/* ===== 管理模态框 ===== */
+#admin-modal {
+    z-index: 1001;
+}
+#admin-modal.hidden { display: none; }
+#admin-modal:not(.hidden) { display: flex; }
+.admin-modal-content {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 28px;
+    width: 520px;
+    max-height: 80vh;
+    overflow-y: auto;
+    backdrop-filter: blur(8px);
+}
+.admin-modal-content h3 {
+    font-size: 22px;
+    color: var(--text-primary);
+    margin-bottom: 18px;
+}
+.admin-field {
+    margin-bottom: 16px;
+}
+.admin-field label {
+    display: block;
+    color: #5a7a9a;
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+.admin-check-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 6px;
+}
+.admin-check-label {
+    display: flex !important;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px !important;
+    color: #e0e8f0;
+    cursor: pointer;
+}
+.admin-check-label small { color: #5a7a9a; font-size: 14px; }
+.admin-check-label input[type="checkbox"] { accent-color: var(--cyan); }
+.admin-modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: flex-end;
+}
+
+/* ===== 响应式: 登录页小屏适配 ===== */
+@media (max-width: 800px) {
+    .login-card {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+    }
+    .login-brand {
+        flex: none;
+        padding: 32px 24px;
+        border-right: none;
+        border-bottom: 1px solid rgba(30,60,100,0.3);
+    }
+    .login-logo { font-size: 56px; margin-bottom: 16px; }
+    .login-title { font-size: 22px; }
+    .login-desc { font-size: 14px; }
+    .login-form {
+        padding: 36px 28px;
+    }
+    .login-heading { font-size: 24px; }
+    .login-input { font-size: 16px; padding: 12px 14px; }
+    .login-btn { font-size: 16px; padding: 13px; }
+}

@@ -1,0 +1,34 @@
+# 电缆桥架饱和度监控系统 — Docker Compose 编排
+# ==============================================
+# 使用方式:
+#   1. 复制 .env.example 为 .env，填写真实配置
+#   2. docker compose up -d
+#   3. 浏览器打开 http://localhost:8000
+#
+# 常用命令:
+#   docker compose up -d          # 后台启动
+#   docker compose logs -f app    # 查看日志
+#   docker compose down           # 停止并删除容器
+#   docker compose restart app    # 重启服务
+
+services:
+  app:
+    build: .
+    container_name: saturation-monitor
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8000}:8000"
+    env_file:
+      - .env
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+    volumes:
+      # 持久化数据库文件（容器销毁后数据不丢失）
+      - ./data:/app/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/docs')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
