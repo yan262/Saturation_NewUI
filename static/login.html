@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <!--
-  登录页面 (login.html)
-  =====================
+  登录页面 (login.html) — 动画角色版
+  ======================================
   首次访问 http://localhost:8000 时显示的页面。
 
   页面布局: 左右全屏分栏
-    左侧 50% — 品牌展示区（Logo、平台名、标语）
-    右侧 50% — 登录表单区（认证方式切换、用户名、密码、登录按钮）
+    左侧 — 品牌展示区 + 4个卡通角色（紫/黑/橙/黄），眼睛跟随鼠标，角色倾斜互动
+    右侧 — 登录表单区（认证方式切换、用户名、密码、登录按钮）
 
   交互流程:
     1. 用户选择认证方式（本地账号 / LDAP/AD）
@@ -15,83 +15,1024 @@
     4. 登录成功 → 将 token 存到 localStorage → 跳转 /index.html（仪表板）
     5. 登录失败 → 显示红色错误提示
 
+  角色动画:
+    - 紫色角色（高层）: 随机眨眼，打字时靠向黑色角色偷看，密码可见时偶尔偷窥
+    - 黑色角色（中层）: 随机眨眼，打字时与紫色角色对视
+    - 橙色角色（前左）: 半圆弧形，只有瞳孔（无眼白）
+    - 黄色角色（前右）: 半圆弧形，只有瞳孔 + 水平嘴巴线
+    - 所有角色眼睛跟随鼠标移动，身体向鼠标方向微微倾斜
+
   页面依赖:
-    - /static/css/style.css   样式
-    - /static/js/particles.js 粒子背景动画
+    - /static/js/particles.js  粒子背景动画
 -->
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>登录 — 电缆桥架饱和度监控</title>
-    <!-- 本地字体: Orbitron(科技感标题), JetBrains Mono(等宽字体) -->
+    <title>登录 — 电缆桥架饱和度监控系统</title>
     <link rel="stylesheet" href="/static/css/fonts.css">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        /* ===== Reset & Base ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+        }
+
+        /* ===== Particle Canvas ===== */
+        #particles-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ===== Main Layout ===== */
+        .login-root {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* ===== Left: Character + Brand Panel (White) ===== */
+        .login-left {
+            flex: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(160deg, #ffffff 0%, #f8f9fc 30%, #f0f2f8 60%, #f8f9fc 100%);
+            padding: 48px 48px 32px;
+            overflow: hidden;
+            min-width: 0;
+        }
+
+        /* Grid dot pattern overlay */
+        .login-left::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(0,0,0,0.04) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 0;
+        }
+
+        /* Glow blobs */
+        .login-left::after {
+            content: '';
+            position: absolute;
+            top: 25%;
+            right: 25%;
+            width: 256px;
+            height: 256px;
+            background: rgba(108, 63, 245, 0.06);
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 0;
+        }
+
+        .left-top {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .left-logo-icon {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            background: rgba(108, 63, 245, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .left-brand {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: 0.5px;
+        }
+
+        .left-bottom {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            gap: 24px;
+            font-size: 13px;
+        }
+        .left-bottom a {
+            color: rgba(0,0,0,0.35);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .left-bottom a:hover { color: rgba(0,0,0,0.7); }
+
+        /* ===== Characters Container ===== */
+        .characters-stage {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            min-height: 350px;
+            max-height: 520px;
+            margin: 20px 0;
+        }
+        .characters-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 550px;
+            height: 100%;
+        }
+
+        /* Character base styles */
+        .char {
+            position: absolute;
+            bottom: 0;
+            transition: transform 0.7s ease-in-out;
+            transform-origin: bottom center;
+        }
+
+        /* Purple — tallest rectangle, back layer */
+        .char-purple {
+            left: 70px;
+            width: 180px;
+            height: 400px;
+            background: #6C3FF5;
+            border-radius: 10px 10px 0 0;
+            z-index: 1;
+            box-shadow: 0 2px 16px rgba(108, 63, 245, 0.15);
+        }
+        .char-purple .eyes-wrap {
+            position: absolute;
+            display: flex;
+            gap: 32px;
+            left: 45px;
+            top: 40px;
+            transition: all 0.7s ease-in-out;
+        }
+
+        /* Black — medium rectangle, middle layer */
+        .char-black {
+            left: 240px;
+            width: 120px;
+            height: 310px;
+            background: #2D2D2D;
+            border-radius: 8px 8px 0 0;
+            z-index: 2;
+        }
+        .char-black .eyes-wrap {
+            position: absolute;
+            display: flex;
+            gap: 24px;
+            left: 26px;
+            top: 32px;
+            transition: all 0.7s ease-in-out;
+        }
+
+        /* Orange — semi-circle, front left */
+        .char-orange {
+            left: 0;
+            width: 240px;
+            height: 200px;
+            background: #FF6B35;
+            border-radius: 120px 120px 0 0;
+            z-index: 3;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .char-orange .eyes-wrap {
+            position: absolute;
+            display: flex;
+            gap: 32px;
+            left: 82px;
+            top: 90px;
+            transition: all 0.2s ease-out;
+        }
+
+        /* Yellow — semi-circle, front right */
+        .char-yellow {
+            left: 310px;
+            width: 140px;
+            height: 230px;
+            background: #E8B800;
+            border-radius: 70px 70px 0 0;
+            z-index: 4;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .char-yellow .eyes-wrap {
+            position: absolute;
+            display: flex;
+            gap: 24px;
+            left: 52px;
+            top: 40px;
+            transition: all 0.2s ease-out;
+        }
+        .char-yellow .mouth {
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: #2D2D2D;
+            border-radius: 2px;
+            left: 40px;
+            top: 88px;
+            transition: all 0.2s ease-out;
+        }
+
+        /* EyeBall (white circle with pupil) */
+        .eye-ball {
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: height 0.15s ease;
+        }
+
+        /* Pupil (black dot) */
+        .pupil {
+            border-radius: 50%;
+            background: #2D2D2D;
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Glow blob between characters */
+        .characters-glow-1 {
+            position: absolute;
+            bottom: 10%;
+            left: 30%;
+            width: 200px;
+            height: 200px;
+            background: rgba(108, 63, 245, 0.06);
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: 0;
+        }
+
+        /* ===== Right: Login Form Panel (Black) ===== */
+        .login-right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a0a;
+            padding: 40px 60px;
+            min-width: 380px;
+            max-width: 600px;
+        }
+        .login-form-wrap {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        /* Mobile logo (hidden on desktop) */
+        .form-mobile-brand {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+        .form-mobile-brand .dot {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            background: rgba(108,63,245,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+        .form-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        .form-header p {
+            font-size: 15px;
+            color: #888888;
+        }
+
+        /* ===== Form Elements ===== */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #999999;
+            margin-bottom: 6px;
+        }
+        .form-input {
+            width: 100%;
+            height: 48px;
+            background: #1a1a1a;
+            border: 1px solid #333333;
+            border-radius: 8px;
+            padding: 0 16px;
+            color: #ffffff;
+            font-size: 16px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-input::placeholder { color: #555555; }
+        .form-input:focus {
+            border-color: #6C3FF5;
+            box-shadow: 0 0 12px rgba(108, 63, 245, 0.3), inset 0 0 8px rgba(108, 63, 245, 0.04);
+        }
+
+        /* Password wrapper */
+        .pw-wrap {
+            position: relative;
+        }
+        .pw-wrap .form-input {
+            padding-right: 48px;
+        }
+        .pw-toggle {
+            position: absolute;
+            right: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666666;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px 12px;
+            line-height: 1;
+            transition: color 0.2s;
+            outline: none;
+        }
+        .pw-toggle:hover { color: #6C3FF5; }
+
+        /* Tabs */
+        .login-tabs {
+            display: flex;
+            margin-bottom: 28px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #333333;
+        }
+        .login-tab {
+            flex: 1;
+            text-align: center;
+            padding: 14px 0;
+            background: #1a1a1a;
+            color: #888888;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            transition: all 0.2s;
+            outline: none;
+        }
+        .login-tab:hover { color: #cccccc; }
+        .login-tab.active {
+            background: rgba(108, 63, 245, 0.2);
+            color: #b794ff;
+        }
+
+        /* Remember + Forgot row */
+        .form-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .form-check {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .form-check input[type="checkbox"] {
+            accent-color: #6C3FF5;
+            width: 16px; height: 16px;
+        }
+        .form-check label {
+            font-size: 14px;
+            color: #888888;
+            cursor: pointer;
+        }
+        .form-link {
+            font-size: 14px;
+            color: #b794ff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .form-link:hover { text-decoration: underline; }
+
+        /* Error */
+        .form-error {
+            background: rgba(255, 51, 51, 0.1);
+            border: 1px solid rgba(255, 51, 51, 0.3);
+            color: #ff3333;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        .form-error.hidden { display: none; }
+
+        /* Submit button */
+        .btn-submit {
+            width: 100%;
+            height: 48px;
+            border-radius: 8px;
+            border: none;
+            background: linear-gradient(135deg, #6C3FF5, #8B5CF6);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(108, 63, 245, 0.3);
+            transition: opacity 0.2s, box-shadow 0.2s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .btn-submit:hover { opacity: 0.9; box-shadow: 0 0 40px rgba(108, 63, 245, 0.45); }
+        .btn-submit:disabled { opacity: 0.6; cursor: default; }
+
+        /* Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px; height: 20px;
+            border: 2px solid transparent;
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Google-style secondary button */
+        .btn-outline {
+            width: 100%;
+            height: 48px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+            background: #1a1a1a;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-outline:hover { background: #2a2a2a; }
+
+        /* Sign up link */
+        .form-footer {
+            text-align: center;
+            font-size: 14px;
+            color: #666666;
+            margin-top: 28px;
+        }
+        .form-footer a {
+            color: #ffffff;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .form-footer a:hover { text-decoration: underline; }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 900px) {
+            .login-root { flex-direction: column; }
+            .login-left {
+                flex: none;
+                height: 280px;
+                padding: 24px 20px 0;
+                background: #ffffff;
+            }
+            .characters-stage {
+                min-height: 200px;
+                max-height: 220px;
+                margin: 8px 0;
+            }
+            .characters-wrap {
+                transform: scale(0.55);
+                transform-origin: center bottom;
+            }
+            .left-bottom { display: none; }
+            .left-top { margin-bottom: 0; }
+
+            .login-right {
+                flex: 1;
+                padding: 24px 28px;
+                min-width: 0;
+                max-width: none;
+                align-items: flex-start;
+                background: #0a0a0a;
+            }
+            .form-mobile-brand {
+                display: flex;
+                margin-bottom: 28px;
+                color: #ffffff;
+            }
+            .form-header { margin-bottom: 28px; }
+            .form-header h1 { font-size: 24px; }
+        }
+    </style>
 </head>
-<body class="login-body">
-    <!-- 全屏粒子动画背景画布 -->
+<body>
+    <!-- 全屏粒子背景 -->
     <canvas id="particles-canvas"></canvas>
 
-    <div class="login-wrapper">
-        <div class="login-card">
-
-            <!-- ======== 左侧: 品牌展示区 ======== -->
-            <div class="login-brand">
-                <div class="login-logo">⚡</div>
-                <div class="login-title">电缆桥架饱和度监控平台</div>
-                <div class="login-divider"></div>
-                <p class="login-desc">
-                    实时监控 · 智能报警<br>
-                    OneNet 物联网云平台<br>
-                    企业级 RBAC 安全管控
-                </p>
-                <div class="login-version">v2.0 Enterprise</div>
+    <div class="login-root">
+        <!-- ======== 左侧: 角色动画 + 品牌 ======== -->
+        <div class="login-left">
+            <!-- 顶部品牌 -->
+            <div class="left-top">
+                <div class="left-logo-icon">⚡</div>
+                <span class="left-brand">电缆桥架饱和度监控系统</span>
             </div>
 
-            <!-- ======== 右侧: 登录表单区 ======== -->
-            <div class="login-form">
-                <h2 class="login-heading">🔐 用户登录</h2>
-                <p class="login-subtitle">选择认证方式以继续</p>
+            <!-- 角色动画舞台 -->
+            <div class="characters-stage">
+                <div class="characters-wrap" id="characters-wrap">
+                    <div class="characters-glow-1"></div>
 
-                <!-- 认证方式切换标签: 本地账号 / LDAP & AD -->
+                    <!-- 紫色角色（高层，后层） -->
+                    <div class="char char-purple" id="char-purple">
+                        <div class="eyes-wrap" id="purple-eyes">
+                            <div class="eye-ball" style="width:18px;height:18px;background:#fff;" data-char="purple" data-idx="0">
+                                <div class="pupil" style="width:7px;height:7px;"></div>
+                            </div>
+                            <div class="eye-ball" style="width:18px;height:18px;background:#fff;" data-char="purple" data-idx="1">
+                                <div class="pupil" style="width:7px;height:7px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 黑色角色（中层） -->
+                    <div class="char char-black" id="char-black">
+                        <div class="eyes-wrap" id="black-eyes">
+                            <div class="eye-ball" style="width:16px;height:16px;background:#fff;" data-char="black" data-idx="0">
+                                <div class="pupil" style="width:6px;height:6px;"></div>
+                            </div>
+                            <div class="eye-ball" style="width:16px;height:16px;background:#fff;" data-char="black" data-idx="1">
+                                <div class="pupil" style="width:6px;height:6px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 橙色角色（前左） -->
+                    <div class="char char-orange" id="char-orange">
+                        <div class="eyes-wrap" id="orange-eyes">
+                            <div class="pupil" style="width:12px;height:12px;" data-char="orange" data-idx="0"></div>
+                            <div class="pupil" style="width:12px;height:12px;" data-char="orange" data-idx="1"></div>
+                        </div>
+                    </div>
+
+                    <!-- 黄色角色（前右） -->
+                    <div class="char char-yellow" id="char-yellow">
+                        <div class="eyes-wrap" id="yellow-eyes">
+                            <div class="pupil" style="width:12px;height:12px;" data-char="yellow" data-idx="0"></div>
+                            <div class="pupil" style="width:12px;height:12px;" data-char="yellow" data-idx="1"></div>
+                        </div>
+                        <div class="mouth" id="yellow-mouth"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部链接 -->
+            <div class="left-bottom">
+                <a href="#">隐私政策</a>
+                <a href="#">服务条款</a>
+                <a href="#">联系我们</a>
+            </div>
+        </div>
+
+        <!-- ======== 右侧: 登录表单 ======== -->
+        <div class="login-right">
+            <div class="login-form-wrap">
+                <!-- 小屏品牌标识 -->
+                <div class="form-mobile-brand">
+                    <div class="dot">⚡</div>
+                    <span>电缆桥架饱和度监控系统</span>
+                </div>
+
+                <!-- 标题 -->
+                <div class="form-header">
+                    <h1>欢迎回来!</h1>
+                    <p>请输入您的登录信息</p>
+                </div>
+
+                <!-- 认证方式切换 -->
                 <div class="login-tabs">
                     <button class="login-tab active" data-tab="local" onclick="switchTab('local')">本地账号</button>
                     <button class="login-tab" data-tab="ldap" onclick="switchTab('ldap')">LDAP / AD</button>
                 </div>
 
-                <!-- 错误提示栏（默认隐藏，登录失败时显示） -->
-                <div id="login-error" class="login-error hidden"></div>
+                <!-- 错误提示 -->
+                <div id="login-error" class="form-error hidden"></div>
 
-                <!-- 用户名输入框 -->
-                <div class="login-field">
-                    <label class="login-label">用户名</label>
-                    <input type="text" id="login-username" class="login-input"
+                <!-- 用户名 -->
+                <div class="form-group">
+                    <label class="form-label" for="login-username">用户名</label>
+                    <input type="text" id="login-username" class="form-input"
                            placeholder="请输入用户名" autocomplete="username" autofocus>
                 </div>
 
-                <!-- 密码输入框（带显隐切换） -->
-                <div class="login-field">
-                    <label class="login-label">密码</label>
-                    <div class="login-pw-wrap">
-                        <input type="password" id="login-password" class="login-input"
+                <!-- 密码 -->
+                <div class="form-group">
+                    <label class="form-label" for="login-password">密码</label>
+                    <div class="pw-wrap">
+                        <input type="password" id="login-password" class="form-input"
                                placeholder="••••••••" autocomplete="current-password">
-                        <!-- 点击切换密码显示/隐藏 -->
-                        <button type="button" class="login-pw-toggle" id="login-pw-toggle"
+                        <button type="button" class="pw-toggle" id="pw-toggle"
                                 onclick="togglePassword()" title="显示/隐藏密码">👁</button>
                     </div>
                 </div>
 
-                <!-- 登录按钮 -->
-                <button id="login-btn" class="login-btn" onclick="doLogin()">➜ 登 录</button>
+                <!-- 记住我 + 忘记密码 -->
+                <div class="form-row">
+                    <div class="form-check">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">记住我 30 天</label>
+                    </div>
+                    <a href="#" class="form-link">忘记密码?</a>
+                </div>
 
-                <!-- 底部提示文字（默认账号仅首次使用，管理员创建正式账号后请使用个人账号） -->
-                <div class="login-footer-text">请联系管理员获取登录账号</div>
+                <!-- 登录按钮 -->
+                <button id="login-btn" class="btn-submit" onclick="doLogin()">登 录</button>
+
+                <!-- 底部文字 -->
+                <div class="form-footer">
+                    还没有账号? <a href="#">联系管理员</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- 粒子背景动画脚本 -->
+    <!-- 粒子背景 -->
     <script src="/static/js/particles.js"></script>
+
+    <!-- ======== 角色动画引擎 ======== -->
+    <script>
+    (function() {
+        // ── 全局状态 ──────────────────────────────────
+        var mouseX = 0, mouseY = 0;
+        var isTyping = false;
+        var isPurpleBlinking = false;
+        var isBlackBlinking = false;
+        var isLookingAtEachOther = false;
+        var isPurplePeeking = false;
+        var showPassword = false;
+        var passwordValue = '';
+
+        // ── DOM 引用 ──────────────────────────────────
+        var purpleEl  = document.getElementById('char-purple');
+        var blackEl   = document.getElementById('char-black');
+        var orangeEl  = document.getElementById('char-orange');
+        var yellowEl  = document.getElementById('char-yellow');
+        var purpleEyesWrap = document.getElementById('purple-eyes');
+        var blackEyesWrap  = document.getElementById('black-eyes');
+        var orangeEyesWrap = document.getElementById('orange-eyes');
+        var yellowEyesWrap = document.getElementById('yellow-eyes');
+        var yellowMouth = document.getElementById('yellow-mouth');
+
+        // 收集所有眼睛/瞳孔元素
+        var allPupils = document.querySelectorAll('.eye-ball .pupil, .char-orange .pupil, .char-yellow .pupil');
+        var allEyeBalls = document.querySelectorAll('.eye-ball');
+
+        // ── 鼠标跟踪 ──────────────────────────────────
+        window.addEventListener('mousemove', function(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // ── 计算瞳孔位置 ──────────────────────────────
+        function calcPupilPos(eyeEl, maxDist, forceLookX, forceLookY) {
+            if (forceLookX !== undefined && forceLookY !== undefined) {
+                return { x: forceLookX, y: forceLookY };
+            }
+            var rect = eyeEl.getBoundingClientRect();
+            var cx = rect.left + rect.width / 2;
+            var cy = rect.top + rect.height / 2;
+            var dx = mouseX - cx;
+            var dy = mouseY - cy;
+            var dist = Math.min(Math.sqrt(dx * dx + dy * dy), maxDist);
+            var angle = Math.atan2(dy, dx);
+            return {
+                x: Math.cos(angle) * dist,
+                y: Math.sin(angle) * dist
+            };
+        }
+
+        // ── 计算角色倾斜 ──────────────────────────────
+        function calcSkew(el) {
+            if (!el) return 0;
+            var rect = el.getBoundingClientRect();
+            var cx = rect.left + rect.width / 2;
+            var dx = mouseX - cx;
+            // Clamp to [-6, 6] degrees
+            return Math.max(-6, Math.min(6, -dx / 120));
+        }
+
+        // ── 计算面部偏移 ──────────────────────────────
+        function calcFaceOffset(el) {
+            if (!el) return { x: 0, y: 0 };
+            var rect = el.getBoundingClientRect();
+            var cx = rect.left + rect.width / 2;
+            var cy = rect.top + rect.height / 3;
+            var dx = mouseX - cx;
+            var dy = mouseY - cy;
+            return {
+                x: Math.max(-15, Math.min(15, dx / 20)),
+                y: Math.max(-10, Math.min(10, dy / 30))
+            };
+        }
+
+        // ── 更新所有瞳孔 ──────────────────────────────
+        function updateAllPupils() {
+            // 获取密码相关状态
+            var pwVisible = showPassword && passwordValue.length > 0;
+
+            // 紫色角色的 look 方向
+            var purpleLookX, purpleLookY;
+            if (pwVisible) {
+                purpleLookX = isPurplePeeking ? 4 : -4;
+                purpleLookY = isPurplePeeking ? 5 : -4;
+            } else if (isLookingAtEachOther) {
+                purpleLookX = 3;
+                purpleLookY = 4;
+            } // else undefined → mouse tracking
+
+            // 黑色角色的 look 方向
+            var blackLookX, blackLookY;
+            if (pwVisible) {
+                blackLookX = -4;
+                blackLookY = -4;
+            } else if (isLookingAtEachOther) {
+                blackLookX = 0;
+                blackLookY = -4;
+            }
+
+            // 橙色/黄色角色的 look 方向
+            var sideLookX = pwVisible ? -5 : undefined;
+            var sideLookY = pwVisible ? -4 : undefined;
+
+            // 更新每个瞳孔
+            allPupils.forEach(function(pupil) {
+                var parent = pupil.parentElement;
+                var charName = parent.getAttribute('data-char');
+                // 对于 eye-ball 包裹的 pupil，用 parent (eye-ball) 来计算位置
+                var refEl = parent.classList.contains('eye-ball') ? parent : pupil;
+                var maxDist = 5;
+
+                // 根据角色调整参数
+                var lx, ly;
+                if (charName === 'purple') {
+                    maxDist = 5;
+                    lx = purpleLookX;
+                    ly = purpleLookY;
+                } else if (charName === 'black') {
+                    maxDist = 4;
+                    lx = blackLookX;
+                    ly = blackLookY;
+                } else if (charName === 'orange' || charName === 'yellow') {
+                    maxDist = 5;
+                    lx = sideLookX;
+                    ly = sideLookY;
+                }
+
+                // 如果角色是 orange 或 yellow，refEl 是 pupil 自身
+                if (charName === 'orange' || charName === 'yellow') {
+                    refEl = pupil;
+                }
+
+                var pos = calcPupilPos(refEl, maxDist, lx, ly);
+                pupil.style.transform = 'translate(' + pos.x + 'px, ' + pos.y + 'px)';
+            });
+        }
+
+        // ── 更新角色身体 ──────────────────────────────
+        function updateBodies() {
+            var pwVisible = showPassword && passwordValue.length > 0;
+            var pwHidden = !showPassword && passwordValue.length > 0;
+
+            var pSkew = calcSkew(purpleEl);
+            var bSkew = calcSkew(blackEl);
+            var oSkew = calcSkew(orangeEl);
+            var ySkew = calcSkew(yellowEl);
+
+            var pFace = calcFaceOffset(purpleEl);
+            var bFace = calcFaceOffset(blackEl);
+            var oFace = calcFaceOffset(orangeEl);
+            var yFace = calcFaceOffset(yellowEl);
+
+            // Purple
+            if (pwVisible) {
+                purpleEl.style.transform = 'skewX(0deg)';
+                purpleEl.style.height = '440px';
+            } else if (isTyping || pwHidden) {
+                purpleEl.style.transform = 'skewX(' + (pSkew - 12) + 'deg) translateX(40px)';
+                purpleEl.style.height = '440px';
+            } else {
+                purpleEl.style.transform = 'skewX(' + pSkew + 'deg)';
+                purpleEl.style.height = '400px';
+            }
+
+            // Black
+            if (pwVisible) {
+                blackEl.style.transform = 'skewX(0deg)';
+            } else if (isLookingAtEachOther) {
+                blackEl.style.transform = 'skewX(' + (bSkew * 1.5 + 10) + 'deg) translateX(20px)';
+            } else if (isTyping || pwHidden) {
+                blackEl.style.transform = 'skewX(' + (bSkew * 1.5) + 'deg)';
+            } else {
+                blackEl.style.transform = 'skewX(' + bSkew + 'deg)';
+            }
+
+            // Orange
+            if (pwVisible) {
+                orangeEl.style.transform = 'skewX(0deg)';
+            } else {
+                orangeEl.style.transform = 'skewX(' + oSkew + 'deg)';
+            }
+
+            // Yellow
+            if (pwVisible) {
+                yellowEl.style.transform = 'skewX(0deg)';
+            } else {
+                yellowEl.style.transform = 'skewX(' + ySkew + 'deg)';
+            }
+
+            // Eye positions
+            if (purpleEyesWrap) {
+                var peLeft = pwVisible ? 20 : (isLookingAtEachOther ? 55 : (45 + pFace.x));
+                var peTop  = pwVisible ? 35 : (isLookingAtEachOther ? 65 : (40 + pFace.y));
+                purpleEyesWrap.style.left = peLeft + 'px';
+                purpleEyesWrap.style.top  = peTop + 'px';
+            }
+            if (blackEyesWrap) {
+                var beLeft = pwVisible ? 10 : (isLookingAtEachOther ? 32 : (26 + bFace.x));
+                var beTop  = pwVisible ? 28 : (isLookingAtEachOther ? 12 : (32 + bFace.y));
+                blackEyesWrap.style.left = beLeft + 'px';
+                blackEyesWrap.style.top  = beTop + 'px';
+            }
+            if (orangeEyesWrap) {
+                orangeEyesWrap.style.left = (pwVisible ? 50 : (82 + oFace.x)) + 'px';
+                orangeEyesWrap.style.top  = (pwVisible ? 85 : (90 + oFace.y)) + 'px';
+            }
+            if (yellowEyesWrap) {
+                yellowEyesWrap.style.left = (pwVisible ? 20 : (52 + yFace.x)) + 'px';
+                yellowEyesWrap.style.top  = (pwVisible ? 35 : (40 + yFace.y)) + 'px';
+            }
+            if (yellowMouth) {
+                yellowMouth.style.left = (pwVisible ? 10 : (40 + yFace.x)) + 'px';
+                yellowMouth.style.top  = (pwVisible ? 88 : (88 + yFace.y)) + 'px';
+            }
+        }
+
+        // ── 眨眼 ──────────────────────────────────────
+        function applyBlink(charName, isBlinking) {
+            var eyes;
+            if (charName === 'purple') {
+                eyes = purpleEl ? purpleEl.querySelectorAll('.eye-ball') : [];
+            } else if (charName === 'black') {
+                eyes = blackEl ? blackEl.querySelectorAll('.eye-ball') : [];
+            } else {
+                return;
+            }
+            eyes.forEach(function(eye) {
+                if (isBlinking) {
+                    eye.style.height = '2px';
+                } else {
+                    // restore original height
+                    var w = parseInt(eye.style.width) || 18;
+                    eye.style.height = w + 'px';
+                }
+            });
+        }
+
+        function startBlinkCycle(charName, blinkStateKey, setBlinkFn) {
+            function schedule() {
+                var interval = Math.random() * 4000 + 3000; // 3-7 seconds
+                setTimeout(function() {
+                    setBlinkFn(true);
+                    applyBlink(charName, true);
+                    setTimeout(function() {
+                        setBlinkFn(false);
+                        applyBlink(charName, false);
+                        schedule();
+                    }, 150);
+                }, interval);
+            }
+            schedule();
+        }
+
+        startBlinkCycle('purple', 'isPurpleBlinking', function(v) { isPurpleBlinking = v; });
+        startBlinkCycle('black', 'isBlackBlinking', function(v) { isBlackBlinking = v; });
+
+        // ── 对视动画（打字时触发） ────────────────────
+        var lookTimer = null;
+        function triggerLookAtEachOther() {
+            if (lookTimer) clearTimeout(lookTimer);
+            isLookingAtEachOther = true;
+            lookTimer = setTimeout(function() {
+                isLookingAtEachOther = false;
+            }, 800);
+        }
+
+        // ── 紫色偷窥动画（密码可见时） ────────────────
+        var peekTimer = null;
+        function schedulePeek() {
+            if (peekTimer) clearTimeout(peekTimer);
+            function doPeek() {
+                if (!(showPassword && passwordValue.length > 0)) {
+                    isPurplePeeking = false;
+                    return;
+                }
+                isPurplePeeking = true;
+                setTimeout(function() {
+                    isPurplePeeking = false;
+                    // schedule next peek
+                    peekTimer = setTimeout(doPeek, Math.random() * 3000 + 2000);
+                }, 800);
+            }
+            peekTimer = setTimeout(doPeek, Math.random() * 3000 + 2000);
+        }
+
+        // ── 输入监听 ──────────────────────────────────
+        var usernameInput = document.getElementById('login-username');
+        var passwordInput = document.getElementById('login-password');
+
+        usernameInput.addEventListener('focus', function() {
+            isTyping = true;
+            triggerLookAtEachOther();
+        });
+        usernameInput.addEventListener('blur', function() {
+            isTyping = false;
+        });
+        usernameInput.addEventListener('input', function() {
+            triggerLookAtEachOther();
+        });
+
+        passwordInput.addEventListener('input', function() {
+            passwordValue = passwordInput.value;
+            triggerLookAtEachOther();
+            if (showPassword && passwordValue.length > 0) {
+                schedulePeek();
+            } else {
+                isPurplePeeking = false;
+                if (peekTimer) clearTimeout(peekTimer);
+            }
+        });
+
+        // 暴露 showPassword 给 togglePassword
+        window._getShowPassword = function() { return showPassword; };
+        window._setShowPassword = function(v) {
+            showPassword = v;
+            passwordValue = passwordInput.value;
+            if (showPassword && passwordValue.length > 0) {
+                schedulePeek();
+            } else {
+                isPurplePeeking = false;
+                if (peekTimer) clearTimeout(peekTimer);
+            }
+        };
+
+        // ── 动画循环 ──────────────────────────────────
+        function animate() {
+            updateBodies();
+            updateAllPupils();
+            requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+
+        // ── 初始位置（防止页面加载时角色在错误位置） ──
+        // 设置默认鼠标位置为页面中心
+        mouseX = window.innerWidth / 2;
+        mouseY = window.innerHeight / 2;
+    })();
+    </script>
 
     <!-- ======== 登录页面交互逻辑 ======== -->
     <script>
@@ -103,21 +1044,17 @@
 
         /**
          * 切换认证方式标签
-         * 选中标签高亮为青色，未选中恢复暗色
-         * LDAP 模式下用户名 placeholder 变为"域账号"提示
          */
         function switchTab(type) {
             authType = type;
-            // 遍历两个标签，根据是否选中切换 active CSS 类
             document.querySelectorAll('.login-tab').forEach(function(t) {
                 t.classList.toggle('active', t.dataset.tab === type);
             });
-            // 更新用户名输入框的占位提示
             var input = document.getElementById('login-username');
             input.placeholder = type === 'ldap' ? '域账号' : '请输入用户名';
         }
 
-        /** 显示错误消息（红色提示条） */
+        /** 显示错误消息 */
         function showError(msg) {
             var el = document.getElementById('login-error');
             el.textContent = msg;
@@ -131,41 +1068,36 @@
 
         /**
          * 切换密码显隐
-         * 点击密码框右侧 👁 图标，在 text（可见）和 password（隐藏）之间切换
          */
         function togglePassword() {
             var input = document.getElementById('login-password');
-            var btn = document.getElementById('login-pw-toggle');
+            var btn = document.getElementById('pw-toggle');
             if (input.type === 'password') {
                 input.type = 'text';
-                btn.textContent = '🙈';   // 捂住眼睛 = 正在显示密码
+                btn.textContent = '🙈';
+                if (window._setShowPassword) window._setShowPassword(true);
             } else {
                 input.type = 'password';
-                btn.textContent = '👁';   // 睁眼 = 密码已隐藏
+                btn.textContent = '👁';
+                if (window._setShowPassword) window._setShowPassword(false);
             }
         }
 
         /**
          * 执行登录请求
-         * 1. 校验输入非空
-         * 2. 发送 POST /api/auth/login（无需鉴权，在中间件白名单中）
-         * 3. 成功 → 存储 token 到 localStorage → 跳转仪表板
-         * 4. 失败 → 显示后端返回的错误信息
          */
         async function doLogin() {
             hideError();
             var username = document.getElementById('login-username').value.trim();
             var password = document.getElementById('login-password').value;
 
-            // 前端基础校验
             if (!username || !password) {
                 showError('请输入用户名和密码');
                 return;
             }
 
-            // 按钮显示 loading spinner，防止重复提交
             var btn = document.getElementById('login-btn');
-            btn.innerHTML = '<span class="login-spinner"></span> 登录中...';
+            btn.innerHTML = '<span class="spinner"></span> 登录中...';
             btn.disabled = true;
 
             try {
@@ -175,40 +1107,36 @@
                     body: JSON.stringify({
                         username: username,
                         password: password,
-                        auth_type: authType   // 'local' 或 'ldap'
+                        auth_type: authType
                     }),
                 });
 
                 var data = await resp.json();
 
                 if (!resp.ok) {
-                    // 后端返回 401/400 等错误
                     showError(data.detail || '登录失败');
-                    btn.innerHTML = '➜ 登 录';
+                    btn.textContent = '登 录';
                     btn.disabled = false;
                     return;
                 }
 
-                // 登录成功: 将 token 和用户信息写入浏览器本地存储
+                // 登录成功
                 localStorage.setItem('access_token', data.access_token);
                 localStorage.setItem('refresh_token', data.refresh_token);
                 localStorage.setItem('user_info', JSON.stringify(data.user));
 
-                // 跳转到仪表板页面
                 window.location.replace('/index.html');
             } catch (e) {
-                // 网络错误（服务器无响应等）
                 showError('网络错误，请检查服务器连接');
-                btn.innerHTML = '➜ 登 录';
+                btn.textContent = '登 录';
                 btn.disabled = false;
             }
         }
 
-        // 密码输入框回车 → 触发登录
+        // 回车触发登录
         document.getElementById('login-password').addEventListener('keydown', function(e) {
             if (e.key === 'Enter') doLogin();
         });
-        // 用户名输入框回车 → 触发登录
         document.getElementById('login-username').addEventListener('keydown', function(e) {
             if (e.key === 'Enter') doLogin();
         });
