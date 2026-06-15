@@ -150,9 +150,9 @@
       '<h3>' + (isNew ? '新建用户' : '编辑用户') + '</h3>' +
       // 用户名（编辑时禁用修改）
       '<div class="admin-field"><label>用户名</label>' +
-        '<input type="text" id="mu-username" class="login-input" value="' + esc(u.username) + '"' + (!isNew ? ' disabled' : '') + '></div>' +
+        '<input type="text" id="mu-username" class="login-input" value="' + esc(u.username) + '"' + (!isNew ? ' disabled' : '') + ' autocomplete="off"></div>' +
       '<div class="admin-field"><label>显示名称</label>' +
-        '<input type="text" id="mu-display" class="login-input" value="' + esc(u.display_name || '') + '"></div>' +
+        '<input type="text" id="mu-display" class="login-input" value="' + esc(u.display_name || '') + '" autocomplete="off"></div>' +
       // 认证方式下拉
       '<div class="admin-field"><label>认证方式</label>' +
         '<select id="mu-auth-type" class="login-input">' +
@@ -163,7 +163,7 @@
       '<div class="admin-field" id="mu-pw-field" style="display:' + ((isNew && u.auth_type !== 'ldap') || !isNew ? 'block' : 'none') + '">' +
         '<label>' + (isNew ? '密码' : '新密码（留空不修改）') + '</label>' +
         '<div class="login-pw-wrap">' +
-          '<input type="password" id="mu-password" class="login-input" placeholder="' + (isNew ? '' : '留空不修改') + '">' +
+          '<input type="password" id="mu-password" class="login-input" placeholder="' + (isNew ? '' : '留空不修改') + '" autocomplete="new-password">' +
           '<button type="button" class="login-pw-toggle" id="mu-pw-toggle" title="显示/隐藏密码">👁</button>' +
         '</div></div>' +
       // 启用开关

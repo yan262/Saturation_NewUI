@@ -66,7 +66,7 @@
                 <div class="login-field">
                     <label class="login-label">用户名</label>
                     <input type="text" id="login-username" class="login-input"
-                           placeholder="admin" autocomplete="username" autofocus>
+                           placeholder="请输入用户名" autocomplete="username" autofocus>
                 </div>
 
                 <!-- 密码输入框（带显隐切换） -->
@@ -114,7 +114,7 @@
             });
             // 更新用户名输入框的占位提示
             var input = document.getElementById('login-username');
-            input.placeholder = type === 'ldap' ? '域账号' : 'admin';
+            input.placeholder = type === 'ldap' ? '域账号' : '请输入用户名';
         }
 
         /** 显示错误消息（红色提示条） */
